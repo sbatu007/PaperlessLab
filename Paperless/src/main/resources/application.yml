@@ -11,6 +11,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
   jackson:
     serialization:
       INDENT_OUTPUT: true   # formatiert JSON-Ausgaben schön
