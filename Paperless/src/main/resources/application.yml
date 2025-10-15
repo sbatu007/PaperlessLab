@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/paperless
+    username: paperless_user
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update     # erstellt automatisch Tabellen, passt sich an Entities an
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true   # formatiert JSON-Ausgaben schön
+
+# Optional: Server-Port (muss zu Dockerfile passen)
+server:
+  port: 8081
+
+# Logging
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
