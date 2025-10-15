@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/paperless
+    url: jdbc:postgresql://localhost:5432/paperless
     username: paperless_user
     password: secret
     driver-class-name: org.postgresql.Driver
