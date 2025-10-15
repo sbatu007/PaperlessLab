@@ -1,5 +1,5 @@
 # Basis-Image Java 21
-FROM eclipse-temurin:21-jdk-focal
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
