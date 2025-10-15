@@ -1,4 +1,5 @@
 services:
+
   db:
     image: postgres:16
     container_name: paperless-db
@@ -15,6 +16,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - spring-boot-network
 
   rest-api:
     build: .
@@ -22,13 +25,23 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/paperless
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/paperless
       SPRING_DATASOURCE_USERNAME: paperless_user
       SPRING_DATASOURCE_PASSWORD: secret
+      SERVER_PORT: 8081
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect  # Dialect for PostgreSQL
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - spring-boot-network
+
+networks:
+  spring-boot-network:
+    name: spring-boot-network
+    driver: bridge
+
 
 volumes:
   db_data:
