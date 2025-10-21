@@ -23,7 +23,8 @@ public class DocumentService {
     }
 
     public DocumentDto create(DocumentDto dto) {
-        var saved = repository.save(DocumentMapper.toEntity(dto));
+        Document entity = DocumentMapper.toEntity(dto);
+        var saved = repository.save(entity);
         return DocumentMapper.toDto(saved);
     }
 
