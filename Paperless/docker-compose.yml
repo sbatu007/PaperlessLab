@@ -20,7 +20,7 @@ services:
       - spring-boot-network
 
   rest-api:
-    build: .
+    build: ./backend
     container_name: paperless-rest
     ports:
       - "8081:8081"
