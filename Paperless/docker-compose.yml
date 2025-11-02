@@ -25,7 +25,7 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/paperless
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/paperless
       SPRING_DATASOURCE_USERNAME: paperless_user
       SPRING_DATASOURCE_PASSWORD: secret
       SERVER_PORT: 8081
@@ -34,6 +34,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
     networks:
       - spring-boot-network
 
