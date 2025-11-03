@@ -1,4 +1,4 @@
-package com.paperlesslab.paperless.documents;
+package com.paperlesslab.paperless.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

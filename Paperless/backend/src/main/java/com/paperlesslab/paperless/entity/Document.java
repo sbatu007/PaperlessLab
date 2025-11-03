@@ -1,4 +1,4 @@
-package com.paperlesslab.paperless.documents;
+package com.paperlesslab.paperless.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
