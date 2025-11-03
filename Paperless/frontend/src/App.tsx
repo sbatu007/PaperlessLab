@@ -1,18 +1,14 @@
 import './App.css'
+import Dashboard from './pages/Dashboard';
+import Detail from './pages/Detail';
+import Upload from './pages/Upload';
+
 import {BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function Home(){
     return <p>Paperless App</p>;
 }
-function Dashboard() {
-    return <h1>Paperless – Dashboard</h1>;
-}
-function Detail() {
-    return <h1>Detail</h1>;
-}
-function Upload() {
-    return <h1>Upload</h1>;
-}
+
 
 export default function App() {
   // const [count, setCount] = useState(0)
@@ -43,11 +39,15 @@ export default function App() {
     return(
         <BrowserRouter>
         <nav style={{padding: 8, borderBottom: '1px solid #ddd'}}>
-            <Link to="/">Home </Link>{" | "}
-            <Link to="/upload">Upload</Link>
+            <Link to="/">Dashboard</Link>{" | "}
+            <Link to="/upload">Upload</Link>{" | "}
+            <Link to="/welcome">Home</Link>
         </nav>
         <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/welcome" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/upload" element={<Upload />} />
         </Routes>
     </BrowserRouter>
     );
