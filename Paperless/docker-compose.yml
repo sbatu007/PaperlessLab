@@ -1,5 +1,4 @@
 services:
-
   db:
     image: postgres:16
     container_name: paperless-db
@@ -16,8 +15,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - spring-boot-network
+    networks: [spring-boot-network]
+
+  adminer:
+    image: adminer
+    ports:
+      - "9091:8080"
+    depends_on:
+      - db
+    networks: [spring-boot-network]
 
   rest-api:
     build: ./backend
@@ -30,20 +36,29 @@ services:
       SPRING_DATASOURCE_PASSWORD: secret
       SERVER_PORT: 8081
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect  # Dialect for PostgreSQL
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - ./uploads:/app/uploads
-    networks:
-      - spring-boot-network
+    networks: [spring-boot-network]
+
+  frontend:
+    build:
+      context: ./frontend
+    image: paperless-frontend:latest
+    # nginx liefert die React-App und proxyt /api → rest-api:8081
+    ports:
+      - "80:80"
+    depends_on:
+      - rest-api
+    networks: [spring-boot-network]
 
 networks:
   spring-boot-network:
     name: spring-boot-network
     driver: bridge
-
 
 volumes:
   db_data:
