@@ -11,6 +11,11 @@ export default function Detail() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        document.body.classList.add("detail");
+        return () => document.body.classList.remove("detail");
+    }, []);
+
+    useEffect(() => {
         (async () => {
             try {
                 const data = await getDocument(Number(id));
@@ -36,23 +41,24 @@ export default function Detail() {
     }
 
     if (error) return <div role="alert">Error: {error}</div>;
-    if (!doc) return <div>Loading…</div>;
+    if (!doc) return <section className="panel"><div className="panel-body">Loading…</div></section>;
 
     return (
-        <main>
-            <h1>{doc.filename}</h1>
-            <p><strong>ID:</strong> {doc.id}</p>
-            <p>
-                <input
-                    value={desc}
-                    onChange={(e) => setDesc(e.target.value)}
-                    placeholder="Description"
-                />
-                <button onClick={onSave} disabled={busy}>
-                    {busy ? "Saving…" : "Save"}
-                </button>
-            </p>
-            <p><Link to="/">Back</Link></p>
-        </main>
+        <section className="panel">
+            <div className="panel-header"><h2>Document</h2></div>
+            <div className="panel-body">
+                <h1>{doc.filename}</h1>
+                <label className="field">
+                    <span>Description</span>
+                    <input value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" />
+                </label>
+                <div className="actions">
+                    <button className="btn primary" onClick={onSave} disabled={busy}>
+                        {busy ? "Saving…" : "Save"}
+                    </button>
+                    <Link className="btn" to="/">Back</Link>
+                </div>
+            </div>
+        </section>
     );
 }

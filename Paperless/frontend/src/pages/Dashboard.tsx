@@ -34,18 +34,40 @@ export default function Dashboard() {
     if (docs.length === 0) return <div>No documents yet.</div>;
 
     return (
-        <main>
-            <h1>Documents</h1>
-            <ul>
-                {docs.map(d => (
-                    <li key={d.id}>
-                        <Link to={`/detail/${d.id}`}>{d.filename}</Link>
-                        {d.description && ` — ${d.description}`}{" "}
-                        <button onClick={() => onDelete(d.id)}>🗑</button>
-                    </li>
-                ))}
-            </ul>
-            <p><Link to="/upload">Upload new</Link></p>
-        </main>
+        <section className="panel">
+            <div className="panel-header">
+                <h2>Documents</h2>
+                <Link to="/upload" className="btn small">+ Upload new Document</Link>
+            </div>
+            <div className="panel-body">
+                <div className="doc-head">
+                    <div>Date</div>
+                    <div>Name</div>
+                    <div>Tags</div>
+                    <div>Actions</div>
+                </div>
+
+                <ul className="doc-list">
+                    {docs.map(d => (
+                        <li key={d.id} className="doc-item">
+                            <div className="col-date">—</div> {/* falls du ein Datum hast, hier einsetzen */}
+                            <div className="col-name">
+                                <Link to={`/detail/${d.id}`}>{d.filename}</Link>
+                                {d.description ? <span className="muted"> — {d.description}</span> : null}
+                            </div>
+                            <div className="col-tags">
+                                {/* Beispiel-Tags; falls keine Tags, Abschnitt leer lassen */}
+                                {/* <span className="badge">Tech</span><span className="badge blue">Inbox</span> */}
+                            </div>
+                            <div className="col-actions">
+                                <Link className="btn small" to={`/detail/${d.id}`}>Open</Link>
+                                <button className="btn small danger" onClick={() => onDelete(d.id)}>Delete</button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
     );
+
 }

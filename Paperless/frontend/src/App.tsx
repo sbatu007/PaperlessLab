@@ -38,18 +38,28 @@ export default function App() {
   // )
     return(
         <BrowserRouter>
-        <nav style={{padding: 8, borderBottom: '1px solid #ddd'}}>
-            <Link to="/">Dashboard</Link>{" | "}
-            <Link to="/upload">Upload</Link>{" | "}
-            <Link to="/welcome">Home</Link>
-        </nav>
-        <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/welcome" element={<Home />} />
-            <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/upload" element={<Upload />} />
-        </Routes>
-    </BrowserRouter>
+            {/* ======= BLAUER HEADER ======= */}
+            <header className="app-header bar">
+                <div className="header-inner">
+                    <h1>Paperless</h1>
+                    <nav className="nav-links">
+                        <Link to="/">Dashboard</Link>
+                        <Link to="/upload">Upload</Link>
+                        <Link to="/welcome">Home</Link>
+                    </nav>
+                </div>
+            </header>
+
+            {/* ======= SEITENINHALT ======= */}
+            <main>
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/upload" element={<Upload />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/welcome" element={<Home />} />
+                </Routes>
+            </main>
+        </BrowserRouter>
     );
 }
 

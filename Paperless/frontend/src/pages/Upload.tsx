@@ -25,24 +25,17 @@ export default function Upload() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <h1>Upload Document</h1>
-            {error && <div role="alert">Error: {error}</div>}
-            <p>
+        <form onSubmit={onSubmit} className="panel">
+            <div className="panel-header"><h2>Upload</h2></div>
+            <div className="panel-body">
+                {error && <div role="alert">Error: {error}</div>}
                 <input type="file" onChange={e => setFile(e.currentTarget.files?.[0] ?? null)} />
-            </p>
-            <p>
-                <input
-                    type="text"
-                    placeholder="Description (optional)"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                />
-            </p>
-            <p>
-                <button type="submit" disabled={busy}>{busy ? 'Uploading…' : 'Upload'}</button>{' '}
-                <Link to="/">Cancel</Link>
-            </p>
+                <input type="text" placeholder="Description (optional)" value={description} onChange={e => setDescription(e.target.value)} />
+                <div className="actions">
+                    <button type="submit" className="btn primary" disabled={busy}>{busy ? "Uploading…" : "Upload"}</button>
+                    <Link to="/" className="btn">Cancel</Link>
+                </div>
+            </div>
         </form>
     );
 }
