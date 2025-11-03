@@ -1,6 +1,7 @@
-package com.paperlesslab.paperless.documents;
+package com.paperlesslab.paperless.mapper;
 
-import com.paperlesslab.paperless.documents.DocumentDto;
+import com.paperlesslab.paperless.dto.DocumentDto;
+import com.paperlesslab.paperless.entity.Document;
 
 public class DocumentMapper {
 
