@@ -17,7 +17,7 @@ async function handle<T>(res: Response): Promise<T> {
 }
 
 export async function listDocuments(): Promise<DocumentDto[]> {
-    const res = await fetch(`${base}/documents/list`, { method: 'GET' });
+    const res = await fetch(`${base}/documents`, { method: 'GET' });
     return handle<DocumentDto[]>(res);
 }
 
