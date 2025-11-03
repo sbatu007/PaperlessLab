@@ -1,0 +1,339 @@
+/* ===============================
+   Paperless – Clean Modern Theme
+   =============================== */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --border: #e6e8eb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #16a34a;
+  --primary: #2563eb;
+  --danger: #dc2626;
+  --radius-lg: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ======== LAYOUT ======== */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+}
+
+#root {
+  width: 100%;
+  max-width: 1100px;
+  padding: 24px;
+}
+
+/* ===============================
+   HEADER – Blue Bar with Nav
+   =============================== */
+
+.app-header.bar {
+  width: 100%;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 1.2rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* alles links */
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.app-header.bar h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Navigation rechts vom Titel */
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ===============================
+   PANELS (Cards)
+   =============================== */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.panel .panel-header {
+  background: #f3f4f6;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel .panel-body {
+  padding: 16px 20px;
+}
+
+/* ===============================
+   TEXT & HEADINGS
+   =============================== */
+h1 {
+  font-size: 1.75rem;
+  margin: 0 0 10px;
+  color: #111827;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 8px;
+}
+
+/* ===============================
+   LINKS
+   =============================== */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ===============================
+   BUTTONS
+   =============================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: #111827;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #eef2f7;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: transparent;
+}
+.btn.primary:hover {
+  background: #1d4ed8;
+}
+
+.btn.danger {
+  background: var(--danger);
+  color: #fff;
+  border-color: transparent;
+}
+.btn.danger:hover {
+  filter: brightness(0.95);
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   INPUTS
+   =============================== */
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font: inherit;
+  margin-bottom: 10px;
+}
+input:focus {
+  outline: 2px solid var(--primary);
+  border-color: var(--primary);
+}
+
+/* ===============================
+   ALERTS
+   =============================== */
+[role="alert"] {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ===============================
+   BADGES / TAGS
+   =============================== */
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0f5132;
+  background: #e7f5ec;
+}
+.badge.blue {
+  color: #1e40af;
+  background: #eef4ff;
+}
+.badge.orange {
+  color: #b45309;
+  background: #fff1e6;
+}
+
+/* ===============================
+   DOCUMENT LIST (table-like)
+   =============================== */
+.doc-list {
+  margin: 0;
+  padding: 0;
+}
+.doc-head {
+  display: grid;
+  grid-template-columns: 140px 1fr 260px 130px;
+  gap: 12px;
+  align-items: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-item {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 140px 1fr 260px 130px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.doc-item:last-child {
+  border-bottom: none;
+}
+.doc-item:hover {
+  background: #f9fbff;
+}
+
+.col-date {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+.col-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.col-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.col-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ===============================
+   FORMS / PANEL SPACING
+   =============================== */
+form.panel .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 840px) {
+  .doc-head,
+  .doc-item {
+    grid-template-columns: 1fr 120px;
+  }
+  .col-date,
+  .col-tags {
+    display: none;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
