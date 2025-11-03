@@ -41,7 +41,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./uploads:/app/uploads
+      - ./data/uploads:/app/uploads
     networks: [spring-boot-network]
 
   frontend:

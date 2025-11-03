@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/documents")
@@ -63,23 +64,50 @@ public class DocumentController {
     public ResponseEntity<DocumentDto> upload(@RequestParam("file") MultipartFile file,
                                               @RequestParam(value = "description", required = false) String description)
             throws IOException {
-        String original = StringUtils.cleanPath(file.getOriginalFilename());
-        if (original.contains("..")) {
+
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("Empty file");
+        }
+        String original = file.getOriginalFilename();
+        if (original == null || original.isBlank()) {
+            original = "upload.pdf"; // minimaler Fallback, keine neuen Variablen in der DB
+        }
+
+        String cleaned = StringUtils.cleanPath(original);
+        if (cleaned.contains("..") || cleaned.startsWith("/") ) {
             throw new IllegalArgumentException("Invalid filename");
         }
 
-        Path target = uploadDir.resolve(original);
-        Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+        Files.createDirectories(uploadDir);
+
+        String safeName = cleaned;
+        Path target = uploadDir.resolve(safeName);
+        if (Files.exists(target)) {
+            String base = safeName;
+            int dot = safeName.lastIndexOf('.');
+            String name = (dot > 0) ? safeName.substring(0, dot) : safeName;
+            String ext  = (dot > 0) ? safeName.substring(dot)      : "";
+            safeName = name + "-" + System.currentTimeMillis() + ext;
+            target = uploadDir.resolve(safeName);
+        }
+
+        Files.copy(file.getInputStream(), target);
 
         Document doc = new Document();
-        doc.setFilename(original);
+        doc.setFilename(safeName);
         doc.setDescription(description);
 
         Document saved = documentService.create(doc);
         DocumentDto out = DocumentMapper.toDto(saved);
-
-        return ResponseEntity.created(URI.create("/documents/" + out.id()))
-                .body(out);
+        return ResponseEntity.created(URI.create("/documents/" + out.id())).body(out);
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<Map<String,String>> badRequest(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
     }
 
+    @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
+    ResponseEntity<Map<String,String>> tooLarge(Exception ex) {
+        return ResponseEntity.status(413).body(Map.of("error", "File too large"));
+    }
 }
