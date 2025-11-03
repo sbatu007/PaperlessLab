@@ -5,31 +5,54 @@ export type DocumentDto = {
     description?: string | null;
 };
 
-
-const base = '/api';
+const base = "/api";
 
 async function handle<T>(res: Response): Promise<T> {
     if (!res.ok) {
-        const text = await res.text().catch(() => '');
+        const text = await res.text().catch(() => "");
         throw new Error(`HTTP ${res.status} ${res.statusText}: ${text}`);
     }
     return (await res.json()) as T;
 }
 
+// GET /documents
 export async function listDocuments(): Promise<DocumentDto[]> {
-    const res = await fetch(`${base}/documents`, { method: 'GET' });
+    const res = await fetch(`${base}/documents`, { method: "GET" });
     return handle<DocumentDto[]>(res);
 }
 
+// GET /documents/{id}
 export async function getDocument(id: number): Promise<DocumentDto> {
-    const res = await fetch(`${base}/documents/${id}`, { method: 'POST' });
+    const res = await fetch(`${base}/documents/${id}`, { method: "GET" });
     return handle<DocumentDto>(res);
 }
 
+// POST /documents/upload?description=...
 export async function uploadDocument(file: File, description?: string): Promise<DocumentDto> {
     const form = new FormData();
-    form.append('file', file);
-    if (description) form.append('description', description);
-    const res = await fetch(`${base}/documents/upload`, { method: 'POST', body: form });
+    form.append("file", file);
+    const qs = description && description.trim()
+        ? `?${new URLSearchParams({ description: description.trim() }).toString()}`
+        : "";
+    const res = await fetch(`${base}/documents/upload${qs}`, {
+        method: "POST",
+        body: form,
+    });
+    return handle<DocumentDto>(res);
+}
+
+// DELETE /documents/{id}
+export async function deleteDocument(id: number): Promise<void> {
+    const res = await fetch(`${base}/documents/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+}
+
+// PUT /documents/{id}
+export async function updateDocument(id: number, description: string): Promise<DocumentDto> {
+    const res = await fetch(`${base}/documents/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ description }),
+    });
     return handle<DocumentDto>(res);
 }
