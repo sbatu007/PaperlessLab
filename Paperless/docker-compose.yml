@@ -15,18 +15,21 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks: [spring-boot-network]
+    networks: [paperless-net]
 
   adminer:
     image: adminer
+    container_name: paperless-adminer
     ports:
       - "9091:8080"
     depends_on:
       - db
-    networks: [spring-boot-network]
+    networks: [paperless-net]
 
   rest-api:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: paperless-rest
     ports:
       - "8081:8081"
@@ -42,22 +45,22 @@ services:
         condition: service_healthy
     volumes:
       - ./data/uploads:/app/uploads
-    networks: [spring-boot-network]
+    networks: [paperless-net]
 
-  frontend:
+  webui:
     build:
       context: ./frontend
-    image: paperless-frontend:latest
-
+      dockerfile: Dockerfile
+    container_name: paperless-webui
     ports:
-      - "80:80"
+      - "80:80"          # <— Web UI über Port 80
     depends_on:
       - rest-api
-    networks: [spring-boot-network]
+    networks: [paperless-net]
 
 networks:
-  spring-boot-network:
-    name: spring-boot-network
+  paperless-net:
+    name: paperless-net
     driver: bridge
 
 volumes:
