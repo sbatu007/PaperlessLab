@@ -84,7 +84,6 @@ public class DocumentController {
         String safeName = cleaned;
         Path target = uploadDir.resolve(safeName);
         if (Files.exists(target)) {
-            String base = safeName;
             int dot = safeName.lastIndexOf('.');
             String name = (dot > 0) ? safeName.substring(0, dot) : safeName;
             String ext  = (dot > 0) ? safeName.substring(dot)      : "";
@@ -102,6 +101,17 @@ public class DocumentController {
         DocumentDto out = DocumentMapper.toDto(saved);
         return ResponseEntity.created(URI.create("/documents/" + out.id())).body(out);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<DocumentDto> update(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> body
+    ) {
+        String description = body.get("description");
+        Document updated = documentService.updateDescription(id, description);
+        return ResponseEntity.ok(DocumentMapper.toDto(updated));
+    }
+
+
     @ExceptionHandler(IllegalArgumentException.class)
     ResponseEntity<Map<String,String>> badRequest(IllegalArgumentException ex) {
         return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));

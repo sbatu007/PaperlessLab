@@ -40,7 +40,7 @@ public class DocumentService {
         );
         rabbitMqProducer.sendDocumentUploaded(message);
 
-        return repository.save(entity);
+        return saved;
     }
 
     @Transactional(readOnly = true)
@@ -54,6 +54,14 @@ public class DocumentService {
             throw new NotFoundException("Document %d not found".formatted(id));
         }
         repository.deleteById(id);
+    }
+
+    public Document updateDescription(Long id, String description) {
+        Document doc = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Document not found: " + id));
+
+        doc.setDescription(description);
+        return repository.save(doc);
     }
 
 }
