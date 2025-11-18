@@ -1,0 +1,5 @@
+Extra Use Case:
+    Status
+    Klassifizierung/Tags
+
+Hinweis: bei Sprint 4 herum wird das Dokument mit OCR verwendet -> OCR ist besser wenn die Sprache angegeben wird -> Upload kann mehrere Informationen beim Upload selbst hinzufügen kann
