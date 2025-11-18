@@ -1,44 +1,23 @@
 package com.paperlesslab.paperless.rabbitmq;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Service;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
-
-@Service
+@Component
 public class RabbitMqProducer {
 
-    private static final String QUEUE = "ocr_queue";
-    private static final String RESULT_QUEUE = "result_queue";
-    private Channel channel;
+    private static final Logger log = LoggerFactory.getLogger(RabbitMqProducer.class);
 
-    public RabbitMqProducer() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("rabbitmq"); // name aus docker compose!
-        factory.setUsername("admin");
-        factory.setUsername("admin");
+    private final RabbitTemplate rabbitTemplate;
 
-        Connection connection = factory.newConnection();
-        factory.setConnectionTimeout(10000);
-        this.channel = connection.createChannel();
-        channel.queueDeclare(QUEUE, true, false, false, null);
-
+    public RabbitMqProducer(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void send(Object message) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(message);
-        channel.basicPublish("", QUEUE, null, json.getBytes());
-        System.out.println(" [Producer] Sent Message: '" + json + "'");
+    public void sendDocumentUploaded(DocumentUploadMessage message) {
+        log.info("Sending OCR job to queue {}: {}", RabbitConfig.OCR_QUEUE, message);
+        rabbitTemplate.convertAndSend(RabbitConfig.OCR_QUEUE, message);
     }
-
-
-
-
-
 }

@@ -9,11 +9,7 @@ export default function Detail() {
     const [desc, setDesc] = useState("");
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        document.body.classList.add("detail");
-        return () => document.body.classList.remove("detail");
-    }, []);
+    const [success, setSuccess] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -30,9 +26,16 @@ export default function Detail() {
     async function onSave() {
         if (!id) return;
         setBusy(true);
+        setError(null);
+        setSuccess(null);
+
         try {
             const updated = await updateDocument(Number(id), desc);
             setDoc(updated);
+
+            setSuccess("Änderungen erfolgreich gespeichert!");
+            setTimeout(() => setSuccess(null), 3000);
+
         } catch (e) {
             setError((e as Error).message);
         } finally {
@@ -40,18 +43,37 @@ export default function Detail() {
         }
     }
 
-    if (error) return <div role="alert">Error: {error}</div>;
+    if (error) return <div role="alert" className="alert error">Error: {error}</div>;
     if (!doc) return <section className="panel"><div className="panel-body">Loading…</div></section>;
 
     return (
         <section className="panel">
             <div className="panel-header"><h2>Document</h2></div>
+
             <div className="panel-body">
-                <h1>{doc.filename}</h1>
-                <label className="field">
-                    <span>Description</span>
-                    <input value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" />
-                </label>
+
+                {/* Erfolgs- / Fehlermeldungen */}
+                {success && <div className="alert success">{success}</div>}
+                {error && <div className="alert error">{error}</div>}
+
+                {/* Titel */}
+                <div className="field">
+                    <label className="label">Titel:</label>
+                    <div className="filename-box">{doc.filename}</div>
+                </div>
+
+                {/* Beschreibung */}
+                <div className="field">
+                    <label className="label">Beschreibung:</label>
+                    <input
+                        value={desc}
+                        onChange={e => setDesc(e.target.value)}
+                        placeholder="Beschreibung eingeben"
+                        className="input"
+                    />
+                </div>
+
+                {/* Buttons */}
                 <div className="actions">
                     <button className="btn primary" onClick={onSave} disabled={busy}>
                         {busy ? "Saving…" : "Save"}
