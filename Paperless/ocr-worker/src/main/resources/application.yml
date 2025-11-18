@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: paperless-ocr-worker
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: paperless
+    password: secret
+
+server:
+  port: 8082
