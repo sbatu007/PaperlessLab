@@ -7,23 +7,26 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 
 @Service
 public class RabbitMqProducer {
 
     private static final String QUEUE = "ocr_queue";
+    private static final String RESULT_QUEUE = "result_queue";
     private Channel channel;
 
-    public RabbitMqProducer() throws IOException {
+    public RabbitMqProducer() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("rabbitmq"); // name aus docker compose!
         factory.setUsername("admin");
         factory.setUsername("admin");
 
-        //Connection connection = factory.newConnection();
-        //this.channel = connection.createChannel();
-        //channel.queueDeclare(QUEUE, true, false, false, null);
+        Connection connection = factory.newConnection();
+        factory.setConnectionTimeout(10000);
+        this.channel = connection.createChannel();
+        channel.queueDeclare(QUEUE, true, false, false, null);
 
     }
 

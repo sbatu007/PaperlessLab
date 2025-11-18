@@ -27,12 +27,12 @@ services:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
 
-  ocr-worker:
-    build: ./OcrWorker
-    container_name: ocr-worker
-    depends_on:
-      - rabbitmq
-    restart: on-failure
+#  ocr-worker:
+#    build: ./OcrWorker
+#    container_name: ocr-worker
+#    depends_on:
+#      - rabbitmq
+#    restart: on-failure
 
 
   adminer:
