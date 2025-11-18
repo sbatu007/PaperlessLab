@@ -1,4 +1,4 @@
-package paperless.worker;
+package com.paperlesslab.paperless.worker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

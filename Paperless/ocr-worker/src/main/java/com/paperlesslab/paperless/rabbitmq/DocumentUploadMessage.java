@@ -1,4 +1,4 @@
-package paperless.worker.rabbitmq;
+package com.paperlesslab.paperless.rabbitmq;
 
 public record DocumentUploadMessage(Long documentId,
                                     String filename,

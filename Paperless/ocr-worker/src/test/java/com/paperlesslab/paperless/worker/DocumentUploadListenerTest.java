@@ -1,10 +1,9 @@
-package paperless.worker;
+package com.paperlesslab.paperless.worker;
 
+import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
+import com.paperlesslab.paperless.worker.rabbitmq.DocumentUploadListener;
 import org.junit.jupiter.api.Test;
-import paperless.worker.rabbitmq.DocumentUploadListener;
-import paperless.worker.rabbitmq.DocumentUploadMessage;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class DocumentUploadListenerTest {

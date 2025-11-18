@@ -1,4 +1,4 @@
-package paperless.worker.rabbitmq;
+package com.paperlesslab.paperless.worker.rabbitmq;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;

@@ -1,5 +1,6 @@
-package paperless.worker.rabbitmq;
+package com.paperlesslab.paperless.worker.rabbitmq;
 
+import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
