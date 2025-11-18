@@ -40,3 +40,68 @@
 .read-the-docs {
   color: #888;
 }
+.field {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.filename {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 300px;
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.alert.success {
+  background: #e6f7e6;
+  color: #116611;
+  border: 1px solid #70c470;
+}
+
+.alert.error {
+  background: #ffe5e5;
+  color: #bb1a1a;
+  border: 1px solid #ffb5b5;
+}
+.panel-body {
+  padding: 30px;
+}
+
+.field {
+  margin-bottom: 25px;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.filename-box {
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 10px 0;
+}
+
+.input {
+  padding: 10px;
+  width: 350px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

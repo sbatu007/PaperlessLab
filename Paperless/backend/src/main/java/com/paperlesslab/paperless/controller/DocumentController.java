@@ -40,7 +40,7 @@ public class DocumentController {
     }
 
     @PostMapping
-    public ResponseEntity<DocumentDto> create(@RequestBody DocumentDto dto) {
+    public ResponseEntity<DocumentDto> create(@Valid @RequestBody DocumentDto dto) {
         Document entity = DocumentMapper.toEntity(dto);
         Document saved = documentService.create(entity);
         DocumentDto out = DocumentMapper.toDto(saved);

@@ -58,10 +58,11 @@ public class DocumentService {
 
     public Document updateDescription(Long id, String description) {
         Document doc = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found: " + id));
+                .orElseThrow(() -> new NotFoundException("Document not found: " + id));
 
         doc.setDescription(description);
         return repository.save(doc);
     }
+
 
 }
