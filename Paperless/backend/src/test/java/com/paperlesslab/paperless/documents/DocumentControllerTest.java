@@ -81,4 +81,42 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$.uploadedAt").doesNotExist())
                 .andExpect(header().string("Location", matchesPattern("/documents/\\d+")));
     }
+
+    @Test
+    void updateDescription_viaPut_returnsUpdatedDto() throws Exception {
+        // Zuerst ein Dokument anlegen
+        var initial = new DocumentDto(null, "update-me.pdf", "old");
+        var createResult = mvc.perform(post("/documents")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(initial)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        JsonNode createdJson = om.readTree(
+                createResult.getResponse().getContentAsString());
+        long id = createdJson.get("id").asLong();
+
+        // Dann Beschreibung updaten
+        String jsonBody = """
+            { "description": "updated description" }
+            """;
+
+        mvc.perform(put("/documents/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.description").value("updated description"));
+    }
+    @Test
+    void create_withEmptyFilename_returnsBadRequestWithFieldError() throws Exception {
+        var invalid = new DocumentDto(null, "   ", "desc");
+
+        mvc.perform(post("/documents")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(invalid)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.filename").exists());
+    }
+
 }

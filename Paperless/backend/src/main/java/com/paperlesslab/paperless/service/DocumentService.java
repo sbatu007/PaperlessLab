@@ -57,8 +57,12 @@ public class DocumentService {
     }
 
     public Document updateDescription(Long id, String description) {
-        Document doc = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Document not found: " + id));
+        if (description != null && description.length() > 2000) {
+            throw new IllegalArgumentException("Description exceeds maximum length of 2000 characters");
+        }
+
+        var doc = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Document not found"));
 
         doc.setDescription(description);
         return repository.save(doc);
