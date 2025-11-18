@@ -33,8 +33,11 @@ public class DocumentService {
     public Document create(Document entity) {
         Document saved = repository.save(entity);
 
-        DocumentUploadMessage message =
-                new DocumentUploadMessage(saved.getId(), saved.getFilename());
+        DocumentUploadMessage message = new DocumentUploadMessage(
+                saved.getId(),
+                saved.getFilename(),
+                saved.getDescription()
+        );
         rabbitMqProducer.sendDocumentUploaded(message);
 
         return repository.save(entity);

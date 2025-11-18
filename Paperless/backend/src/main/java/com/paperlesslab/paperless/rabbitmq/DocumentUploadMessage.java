@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public record DocumentUploadMessage(
         Long documentId,
-        String filename
+        String filename,
+        String description
 ) implements Serializable {
 }

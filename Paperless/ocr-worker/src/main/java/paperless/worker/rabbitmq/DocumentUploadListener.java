@@ -12,8 +12,7 @@ public class DocumentUploadListener {
 
     @RabbitListener(queues = RabbitConfig.OCR_QUEUE)
     public void handle(DocumentUploadMessage message) {
-        log.info("OCR-Worker received document: id={}, filename={}",
-                message.documentId(), message.filename());
-
+        log.info("Received OCR job: documentId={}, filename={}, description={}",
+                message.documentId(), message.filename(), message.description());
     }
 }
