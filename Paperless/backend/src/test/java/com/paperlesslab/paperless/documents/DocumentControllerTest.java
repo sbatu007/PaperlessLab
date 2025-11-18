@@ -3,10 +3,12 @@ package com.paperlesslab.paperless.documents;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paperlesslab.paperless.dto.DocumentDto;
+import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
@@ -23,6 +25,8 @@ class DocumentControllerTest {
 
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper om;
+    @MockBean
+    RabbitMqProducer rabbitMqProducer;
 
     @Test
     void create_list_get_delete_exposesOnlyDtoFields() throws Exception {
