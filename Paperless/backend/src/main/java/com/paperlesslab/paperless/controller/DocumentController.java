@@ -2,6 +2,7 @@ package com.paperlesslab.paperless.controller;
 
 import com.paperlesslab.paperless.dto.DocumentDto;
 import com.paperlesslab.paperless.mapper.DocumentMapper;
+import com.paperlesslab.paperless.minio.FileStorageService;
 import com.paperlesslab.paperless.service.DocumentService;
 import com.paperlesslab.paperless.entity.Document;
 import jakarta.validation.Valid;
@@ -18,15 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
 @RequestMapping("/documents")
 public class DocumentController {
 
     private final DocumentService documentService;
     private final Path uploadDir = Paths.get("uploads");
+    private final FileStorageService fileStorageService;
 
-    public DocumentController(DocumentService documentService) throws IOException {
+    public DocumentController(DocumentService documentService, FileStorageService fileStorageService) throws IOException {
         this.documentService = documentService;
+        this.fileStorageService = fileStorageService;
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
         }
@@ -75,7 +77,7 @@ public class DocumentController {
         }
 
         String cleaned = StringUtils.cleanPath(original);
-        if (cleaned.contains("..") || cleaned.startsWith("/") ) {
+        if (cleaned.contains("..") || cleaned.startsWith("/")) {
             throw new IllegalArgumentException("Invalid filename");
         }
 
@@ -91,6 +93,8 @@ public class DocumentController {
             target = uploadDir.resolve(safeName);
         }
 
+        fileStorageService.uploadPdf(file,safeName);
+
         Files.copy(file.getInputStream(), target);
 
         Document doc = new Document();
@@ -101,6 +105,7 @@ public class DocumentController {
         DocumentDto out = DocumentMapper.toDto(saved);
         return ResponseEntity.created(URI.create("/documents/" + out.id())).body(out);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<DocumentDto> update(
             @PathVariable Long id,

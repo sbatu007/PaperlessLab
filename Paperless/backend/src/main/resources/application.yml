@@ -24,6 +24,13 @@ spring:
     username: ${SPRING_RABBITMQ_USERNAME:guest}
     password: ${SPRING_RABBITMQ_PASSWORD:guest}
 
+  app:
+    minio:
+      url: ${MINIO_URL:http://minio:9000}
+      access-key: ${MINIO_ACCESS_KEY:paperless}
+      secret-key: ${MINIO_SECRET_KEY:paperlesssecret}
+      bucket: ${MINIO_BUCKET:documents}
+
 # Optional: Server-Port (muss zu Dockerfile passen)
 server:
   port: 8081
