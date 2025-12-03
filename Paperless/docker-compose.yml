@@ -19,24 +19,55 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
     container_name: paperless-rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: paperless
       RABBITMQ_DEFAULT_PASS: secret
     ports:
       - "5672:5672"      # AMQP
-      - "9093:15672"     # Management UI wie im Diagramm
+      - "9093:15672"     # Management UI
+    networks: [ paperless-net ]
+
+  minio:
+    image: minio/minio
+    container_name: paperless-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: paperless
+      MINIO_ROOT_PASSWORD: paperlesssecret
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
     networks: [ paperless-net ]
 
   ocr-worker:
     build: ./ocr-worker
     container_name: paperless-ocr-worker
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+      minio:
+        condition: service_started
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: paperless
+      SPRING_RABBITMQ_PASSWORD: secret
+
+      MINIO_URL: http://minio:9000
+      MINIO_ACCESS_KEY: paperless
+      MINIO_SECRET_KEY: paperlesssecret
+      MINIO_BUCKET: documents
     ports:
       - "8082:8082"
     networks: [ paperless-net ]
-
 
   adminer:
     image: adminer
@@ -51,13 +82,12 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: paperless-rest
-    ports:
-      - "8081:8081"
+    container_name: paperless-backend
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/paperless
       SPRING_DATASOURCE_USERNAME: paperless_user
       SPRING_DATASOURCE_PASSWORD: secret
+
       SERVER_PORT: 8081
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
@@ -66,6 +96,11 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: paperless
       SPRING_RABBITMQ_PASSWORD: secret
+
+      MINIO_URL: http://minio:9000
+      MINIO_ACCESS_KEY: paperless
+      MINIO_SECRET_KEY: paperlesssecret
+      MINIO_BUCKET: documents
     depends_on:
       db:
         condition: service_healthy
@@ -79,7 +114,7 @@ services:
       dockerfile: Dockerfile
     container_name: paperless-webui
     ports:
-      - "80:80"          # <— Web UI über Port 80
+      - "80:80"
     depends_on:
       - rest-api
     networks: [ paperless-net ]
@@ -91,3 +126,4 @@ networks:
 
 volumes:
   db_data:
+  minio_data:
