@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/minio/MinioConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrEngine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/TesseractOcrEngine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/OcrServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/rabbitmq/DocumentUploadListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/rabbitmq/DocumentUploadListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/DocumentUploadListenerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/DocumentUploadListenerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/TesseractOcrEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/TesseractOcrEngine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="SP4-1" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -88,6 +87,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "C:\\Users\\janse\\AppData\\Local\\Programs\\IntelliJ IDEA Ultimate\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -240,6 +240,7 @@
       <workItem from="1763651033018" duration="3511000" />
       <workItem from="1764715243191" duration="82000" />
       <workItem from="1764715344687" duration="9134000" />
+      <workItem from="1764798603847" duration="3015000" />
     </task>
     <servers />
   </component>

@@ -17,6 +17,7 @@ public class TesseractOcrEngine implements OcrEngine {
 
     public TesseractOcrEngine() {
         this.tesseract = new Tesseract();
+        tesseract.setDatapath("/usr/share/tesseract-ocr/5/tessdata");
         tesseract.setLanguage("eng");
     }
 
