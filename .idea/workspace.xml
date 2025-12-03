@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/minio/FileStorageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/minio/MinioConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerUploadTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/minio/FileStorageServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/minio/MinioConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/TesseractOcrEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/OcrServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/rabbitmq/DocumentUploadListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/rabbitmq/DocumentUploadListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/DocumentUploadListenerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/DocumentUploadListenerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -61,8 +62,10 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Docker.Paperless: Compose Deployment.executor": "Run",
     "JUnit.DocumentControllerUploadTest.executor": "Run",
+    "JUnit.DocumentUploadListenerTest (1).executor": "Run",
     "JUnit.DocumentUploadListenerTest.executor": "Run",
     "JUnit.FileStorageServiceTest.executor": "Run",
+    "JUnit.OcrServiceTest.executor": "Run",
     "Maven.Paperless [clean].executor": "Run",
     "Maven.Paperless [compile].executor": "Run",
     "Maven.Paperless [install].executor": "Run",
@@ -76,7 +79,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.OcrWorkerApplication (1).executor": "Run",
     "Spring Boot.OcrWorkerApplication.executor": "Run",
-    "git-widget-placeholder": "SP4-1",
+    "git-widget-placeholder": "SP4-2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/jansenwu/Documents/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -103,7 +106,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DocumentControllerUploadTest">
+  <component name="RunManager" selected="JUnit.OcrServiceTest">
     <configuration name="DocumentControllerUploadTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Paperless" />
       <extension name="coverage">
@@ -114,6 +117,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
       <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerUploadTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentUploadListenerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ocr-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.DocumentUploadListenerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,6 +167,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OcrServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ocr-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OcrWorkerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ocr-worker" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.worker.OcrWorkerApplication" />
@@ -170,14 +203,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Paperless: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="Paperless/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -186,10 +211,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OcrServiceTest" />
+        <item itemvalue="JUnit.DocumentUploadListenerTest (1)" />
         <item itemvalue="JUnit.DocumentControllerUploadTest" />
         <item itemvalue="JUnit.FileStorageServiceTest" />
         <item itemvalue="JUnit.DocumentUploadListenerTest" />
-        <item itemvalue="Docker.Paperless: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -213,7 +239,7 @@
       <workItem from="1763506809903" duration="2285000" />
       <workItem from="1763651033018" duration="3511000" />
       <workItem from="1764715243191" duration="82000" />
-      <workItem from="1764715344687" duration="4258000" />
+      <workItem from="1764715344687" duration="9134000" />
     </task>
     <servers />
   </component>

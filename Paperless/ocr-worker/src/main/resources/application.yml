@@ -6,6 +6,12 @@ spring:
     port: 5672
     username: paperless
     password: secret
+app:
+  minio:
+    url: ${MINIO_URL:http://minio:9000}
+    access-key: ${MINIO_ACCESS_KEY:paperless}
+    secret-key: ${MINIO_SECRET_KEY:paperlesssecret}
+    bucket: ${MINIO_BUCKET:documents}
 
 server:
   port: 8082
