@@ -14,6 +14,7 @@ backend/.mvn/wrapper/maven-wrapper.jar
 .sts4-cache
 
 ### IntelliJ IDEA ###
+.idea
 Paperless/.idea
 *.iws
 *.iml
