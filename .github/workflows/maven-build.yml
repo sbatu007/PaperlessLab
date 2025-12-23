@@ -1,8 +1,8 @@
-name: CI with Maven
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main", "SP5-1" ]
+    branches: [ "main" , "SP5-1"]
   pull_request:
     branches: [ "main" ]
 
@@ -10,22 +10,18 @@ jobs:
   build-backend:
     name: Build Backend REST API
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
       - name: Build Backend with Maven
         run: mvn -B package --file Paperless/backend/pom.xml
-
       - name: Upload Backend Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: backend-api
           path: Paperless/backend/target/*.jar
@@ -33,22 +29,18 @@ jobs:
   build-ocr-worker:
     name: Build OCR Worker
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
       - name: Build OCR Worker with Maven
         run: mvn -B package --file Paperless/ocr-worker/pom.xml
-
       - name: Upload OCR Worker Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: ocr-worker
           path: Paperless/ocr-worker/target/*.jar
@@ -56,27 +48,22 @@ jobs:
   build-frontend:
     name: Build Frontend
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: './Paperless/frontend/package-lock.json'
-
       - name: Install dependencies
         working-directory: ./Paperless/frontend
         run: npm ci
-
       - name: Build Frontend
         working-directory: ./Paperless/frontend
         run: npm run build
-
       - name: Upload Frontend Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: frontend-dist
           path: Paperless/frontend/dist
