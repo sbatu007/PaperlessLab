@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SWEN3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SWEN3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +60,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "SP5-1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -148,7 +148,7 @@
       <updated>1763503688323</updated>
       <workItem from="1763503689505" duration="957000" />
       <workItem from="1764764281453" duration="860000" />
-      <workItem from="1766439567585" duration="5703000" />
+      <workItem from="1766439567585" duration="6208000" />
     </task>
     <servers />
   </component>
