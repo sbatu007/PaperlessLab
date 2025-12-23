@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/semester-project-architecture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semester-project.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SWEN3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SWEN3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +68,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "com.github.copilot.settings.customization.CustomizationConfigurable",
     "vue.rearranger.settings.migration": "true"
@@ -146,7 +148,7 @@
       <updated>1763503688323</updated>
       <workItem from="1763503689505" duration="957000" />
       <workItem from="1764764281453" duration="860000" />
-      <workItem from="1766439567585" duration="2288000" />
+      <workItem from="1766439567585" duration="5703000" />
     </task>
     <servers />
   </component>
