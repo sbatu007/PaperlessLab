@@ -1,0 +1,59 @@
+package com.paperlesslab.paperless.rabbitmq;
+
+import com.paperlesslab.paperless.dto.GenAiResultMessage;
+import com.paperlesslab.paperless.entity.Document;
+import com.paperlesslab.paperless.repository.DocumentRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class GenAiResultListenerTest {
+
+    @Mock
+    private DocumentRepository documentRepository;
+
+    @InjectMocks
+    private GenAiResultListener listener;
+
+    @Test
+    void handleGenAiResult_savesOcrTextAndSummary() {
+        Document doc = new Document();
+        doc.setId(1L);
+        doc.setFilename("test.pdf");
+        doc.setDescription("desc");
+        doc.setUploadedAt(LocalDateTime.now());
+
+        when(documentRepository.findById(1L)).thenReturn(Optional.of(doc));
+        when(documentRepository.save(any(Document.class))).thenReturn(doc);
+
+        GenAiResultMessage message = new GenAiResultMessage(1L, "OCR content", "Result");
+
+        listener.handleOcrResult(message);
+
+        verify(documentRepository).findById(1L);
+        verify(documentRepository).save(doc);
+        assert doc.getOcrText().equals("OCR content");
+        assert doc.getResult().equals("Result");
+    }
+
+    @Test
+    void handleGenAiResult_throwsIfDocumentNotFound() {
+        when(documentRepository.findById(99L)).thenReturn(Optional.empty());
+
+        GenAiResultMessage message = new GenAiResultMessage(99L, "text", "result");
+
+        assertThatThrownBy(() -> listener.handleOcrResult(message))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("Document not found");
+    }
+}

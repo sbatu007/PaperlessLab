@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class DocumentController {
     @PostMapping
     public ResponseEntity<DocumentDto> create(@Valid @RequestBody DocumentDto dto) {
         Document entity = DocumentMapper.toEntity(dto);
+        entity.setUploadedAt(LocalDateTime.now());
         Document saved = documentService.create(entity);
         DocumentDto out = DocumentMapper.toDto(saved);
         return ResponseEntity.created(URI.create("/documents/" + out.id()))
@@ -73,7 +75,7 @@ public class DocumentController {
         }
         String original = file.getOriginalFilename();
         if (original == null || original.isBlank()) {
-            original = "upload.pdf"; // minimaler Fallback, keine neuen Variablen in der DB
+            original = "upload.pdf";
         }
 
         String cleaned = StringUtils.cleanPath(original);
@@ -93,18 +95,20 @@ public class DocumentController {
             target = uploadDir.resolve(safeName);
         }
 
-        fileStorageService.uploadPdf(file,safeName);
+        fileStorageService.uploadPdf(file, safeName);
 
         Files.copy(file.getInputStream(), target);
 
         Document doc = new Document();
         doc.setFilename(safeName);
         doc.setDescription(description);
+        doc.setUploadedAt(LocalDateTime.now()); // ← Hinzugefügt
 
         Document saved = documentService.create(doc);
         DocumentDto out = DocumentMapper.toDto(saved);
         return ResponseEntity.created(URI.create("/documents/" + out.id())).body(out);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<DocumentDto> update(
