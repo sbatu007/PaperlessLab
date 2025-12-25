@@ -26,16 +26,13 @@ class DocumentControllerTest {
 
     @Autowired MockMvc mvc;
     @Autowired ObjectMapper om;
-    @MockBean
-    RabbitMqProducer rabbitMqProducer;
-    @MockBean
-    FileStorageService fileStorageService;
+    @MockBean RabbitMqProducer rabbitMqProducer;
+    @MockBean FileStorageService fileStorageService;
 
     @Test
     void create_list_get_delete_exposesOnlyDtoFields() throws Exception {
-        var dto = new DocumentDto(null, "abc.pdf", "hello");
+        var dto = new DocumentDto(null, "abc.pdf", "hello", null, null);
 
-        // CREATE -> 201 + Location, und beantwortetes JSON enthält KEIN 'uploadedAt' (Entity-Feld)
         var create = mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(dto)))
@@ -45,9 +42,10 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$.filename").value("abc.pdf"))
                 .andExpect(jsonPath("$.description").value("hello"))
                 .andExpect(jsonPath("$.uploadedAt").doesNotExist())
+                .andExpect(jsonPath("$.ocrText").doesNotExist())
+                .andExpect(jsonPath("$.summary").doesNotExist())
                 .andReturn();
 
-        // LIST -> nur DTO-Felder
         mvc.perform(get("/documents"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists())
@@ -55,7 +53,6 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$[0].description").exists())
                 .andExpect(jsonPath("$[0].uploadedAt").doesNotExist());
 
-        // GET by id -> nur DTO-Felder
         JsonNode saved = om.readTree(create.getResponse().getContentAsString());
         long id = saved.get("id").asLong();
 
@@ -66,7 +63,6 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$.description").value("hello"))
                 .andExpect(jsonPath("$.uploadedAt").doesNotExist());
 
-        // DELETE -> 204
         mvc.perform(delete("/documents/{id}", id))
                 .andExpect(status().isNoContent());
     }
@@ -79,15 +75,15 @@ class DocumentControllerTest {
                         .file(file)
                         .param("description", "from test"))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.filename").value(matchesPattern("hello-\\d+\\.txt")))                .andExpect(jsonPath("$.description").value("from test"))
+                .andExpect(jsonPath("$.filename").value(matchesPattern("hello-\\d+\\.txt")))
+                .andExpect(jsonPath("$.description").value("from test"))
                 .andExpect(jsonPath("$.uploadedAt").doesNotExist())
                 .andExpect(header().string("Location", matchesPattern("/documents/\\d+")));
     }
 
     @Test
     void updateDescription_viaPut_returnsUpdatedDto() throws Exception {
-        // Zuerst ein Dokument anlegen
-        var initial = new DocumentDto(null, "update-me.pdf", "old");
+        var initial = new DocumentDto(null, "update-me.pdf", "old", null, null);
         var createResult = mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(initial)))
@@ -98,7 +94,6 @@ class DocumentControllerTest {
                 createResult.getResponse().getContentAsString());
         long id = createdJson.get("id").asLong();
 
-        // Dann Beschreibung updaten
         String jsonBody = """
             { "description": "updated description" }
             """;
@@ -110,9 +105,10 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.description").value("updated description"));
     }
+
     @Test
     void create_withEmptyFilename_returnsBadRequestWithFieldError() throws Exception {
-        var invalid = new DocumentDto(null, "   ", "desc");
+        var invalid = new DocumentDto(null, "   ", "desc", null, null);
 
         mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -120,5 +116,4 @@ class DocumentControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.filename").exists());
     }
-
 }

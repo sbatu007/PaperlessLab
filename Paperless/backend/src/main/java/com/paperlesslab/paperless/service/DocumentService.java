@@ -68,5 +68,15 @@ public class DocumentService {
         return repository.save(doc);
     }
 
+    public Document updateOcrAndSummary(Long id, String ocrText, String summary) {
+        var doc = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Document %d not found".formatted(id)));
+
+        if (ocrText != null) doc.setOcrText(ocrText);
+        if (summary != null) doc.setResult(summary);
+
+        return repository.save(doc);
+    }
+
 
 }

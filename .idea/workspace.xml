@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/RabbitConfigTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/mapper/DocumentMapperTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +65,7 @@
     "Docker.Paperless: Compose Deployment.executor": "Run",
     "JUnit.DocumentControllerTest.executor": "Run",
     "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Debug",
+    "JUnit.DocumentMapperTest.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -75,7 +82,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "com.dsoftware.ghmanager.ui.settings.GhActionsManagerConfigurable",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -98,7 +105,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RabbitConfigTest">
+  <component name="RunManager" selected="JUnit.DocumentControllerTest">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -132,6 +139,21 @@
       <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerTest" />
       <option name="METHOD_NAME" value="uploadMultipart_and_noEntityFieldsExposed" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.mapper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.mapper.DocumentMapperTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,9 +202,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RabbitConfigTest" />
-        <item itemvalue="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" />
         <item itemvalue="JUnit.DocumentControllerTest" />
+        <item itemvalue="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" />
+        <item itemvalue="JUnit.DocumentMapperTest" />
+        <item itemvalue="JUnit.RabbitConfigTest" />
       </list>
     </recent_temporary>
   </component>
@@ -207,7 +230,7 @@
       <workItem from="1766439567585" duration="6407000" />
       <workItem from="1766450111234" duration="76000" />
       <workItem from="1766450204795" duration="1382000" />
-      <workItem from="1766677297337" duration="1449000" />
+      <workItem from="1766677297337" duration="3588000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,9 @@ package com.paperlesslab.paperless.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.Instant;
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -12,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Document {
 
     @Id
@@ -25,8 +29,14 @@ public class Document {
     @Column(length = 2000)
     private String description;
 
-    @Column(nullable = false)
-    private Instant uploadedAt = Instant.now();
+    @Column(name = "uploaded_at", nullable = false)
+    private LocalDateTime uploadedAt;
+
+    @Column(name = "ocr_text", columnDefinition = "TEXT")
+    private String ocrText;
+
+    @Column(name = "result", columnDefinition = "TEXT")
+    private String result;
 
 
 }
