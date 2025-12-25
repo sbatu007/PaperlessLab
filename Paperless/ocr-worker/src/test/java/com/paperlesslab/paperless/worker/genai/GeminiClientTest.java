@@ -37,7 +37,9 @@ class GeminiClientTest {
                 server.url("/v1beta").toString(),
                 "gemini-2.5-flash-lite",
                 50,
-                0.1
+                0.1,
+                false,  // logRequest
+                false   // logResponse
         );
 
         String out = client.summarizeGermanBullets("some text");
@@ -53,7 +55,9 @@ class GeminiClientTest {
                 server.url("/v1beta").toString(),
                 "gemini-2.5-flash-lite",
                 50,
-                0.1
+                0.1,
+                false,  // logRequest
+                false   // logResponse
         );
 
         assertThrows(IllegalStateException.class, () -> client.summarizeGermanBullets("x"));
@@ -68,7 +72,9 @@ class GeminiClientTest {
                 server.url("/v1beta").toString(),
                 "gemini-2.5-flash-lite",
                 50,
-                0.1
+                0.1,
+                false,  // logRequest
+                false   // logResponse
         );
 
         assertNull(client.summarizeGermanBullets(""));
@@ -88,7 +94,9 @@ class GeminiClientTest {
                 server.url("/v1beta").toString(),
                 "gemini-2.5-flash-lite",
                 50,
-                0.1
+                0.1,
+                false,  // logRequest
+                false   // logResponse
         );
 
         assertNull(client.summarizeGermanBullets("some text"));

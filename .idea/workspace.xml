@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/GenAiResultMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/ResultQueueListenerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/genai/OcrTextCleaner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/genai/OcrTextCleanerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/ResultQueueListenerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListenerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/genai/GeminiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/genai/GeminiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/genai/GeminiClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/genai/GeminiClientTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,12 +70,14 @@
     "JUnit.DocumentControllerTest.executor": "Run",
     "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Run",
     "JUnit.DocumentMapperTest.executor": "Run",
+    "JUnit.GeminiClientTest.executor": "Run",
     "JUnit.GenAiResultListenerTest.executor": "Run",
+    "JUnit.OcrTextCleanerTest.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "SP5-2",
+    "git-widget-placeholder": "SP5-final",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -81,6 +90,7 @@
     "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "ts.external.directory.path": "C:\\Users\\janse\\IdeaProjects\\SWEN3\\Paperless\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -106,7 +116,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GenAiResultListenerTest">
+  <component name="RunManager" selected="JUnit.OcrTextCleanerTest">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -144,16 +154,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DocumentMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Paperless" />
+    <configuration name="GeminiClientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ocr-worker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.mapper.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.worker.genai.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.mapper" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.mapper.DocumentMapperTest" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker.genai" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.genai.GeminiClientTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,16 +184,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RabbitConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Paperless" />
+    <configuration name="OcrTextCleanerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ocr-worker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.dto.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.worker.genai.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.rabbitmq" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.rabbitmq.RabbitConfigTest" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker.genai" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.genai.OcrTextCleanerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -218,11 +228,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OcrTextCleanerTest" />
         <item itemvalue="JUnit.GenAiResultListenerTest" />
+        <item itemvalue="JUnit.GeminiClientTest" />
         <item itemvalue="JUnit.DocumentControllerTest" />
         <item itemvalue="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" />
-        <item itemvalue="JUnit.DocumentMapperTest" />
-        <item itemvalue="JUnit.RabbitConfigTest" />
       </list>
     </recent_temporary>
   </component>
@@ -275,10 +285,14 @@
     {
       "branch": "SP5-2",
       "currentBranchFilter": true
+    },
+    {
+      "branch": "SP5-final",
+      "currentBranchFilter": true
     }
   ],
   "lastFilter": {
-    "branch": "SP5-2",
+    "branch": "SP5-final",
     "currentBranchFilter": true
   }
 }]]></component>
