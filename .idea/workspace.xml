@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/semester-project-architecture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/semester-project.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/maven-build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +60,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "SP5-1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -69,8 +68,11 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.customization.CustomizationConfigurable",
+    "settings.editor.selected.configurable": "com.dsoftware.ghmanager.ui.settings.GhActionsManagerConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -146,13 +148,31 @@
       <updated>1763503688323</updated>
       <workItem from="1763503689505" duration="957000" />
       <workItem from="1764764281453" duration="860000" />
-      <workItem from="1766439567585" duration="2288000" />
+      <workItem from="1766439567585" duration="6407000" />
+      <workItem from="1766450111234" duration="76000" />
+      <workItem from="1766450204795" duration="485000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="WfRunsListSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "branch": "SP5-1",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "SP5-1",
+      "currentBranchFilter": true
+    }
+  ],
+  "lastFilter": {
+    "branch": "SP5-1",
+    "currentBranchFilter": true
+  }
+}]]></component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />

@@ -3,6 +3,7 @@ package com.paperlesslab.paperless.documents;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paperlesslab.paperless.dto.DocumentDto;
+import com.paperlesslab.paperless.minio.FileStorageService;
 import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ class DocumentControllerTest {
     @Autowired ObjectMapper om;
     @MockBean
     RabbitMqProducer rabbitMqProducer;
+    @MockBean
+    FileStorageService fileStorageService;
 
     @Test
     void create_list_get_delete_exposesOnlyDtoFields() throws Exception {
@@ -76,8 +79,7 @@ class DocumentControllerTest {
                         .file(file)
                         .param("description", "from test"))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.filename").value("hello.txt"))
-                .andExpect(jsonPath("$.description").value("from test"))
+                .andExpect(jsonPath("$.filename").value(matchesPattern("hello-\\d+\\.txt")))                .andExpect(jsonPath("$.description").value("from test"))
                 .andExpect(jsonPath("$.uploadedAt").doesNotExist())
                 .andExpect(header().string("Location", matchesPattern("/documents/\\d+")));
     }
