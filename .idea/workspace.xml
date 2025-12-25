@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/maven-build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,28 +53,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.Paperless: Compose Deployment.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "SP5-1",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "com.dsoftware.ghmanager.ui.settings.GhActionsManagerConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Paperless: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DocumentControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;SP5-1&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/janse/IdeaProjects/SWEN3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.dsoftware.ghmanager.ui.settings.GhActionsManagerConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
@@ -95,12 +96,43 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.OcrWorkerApplication">
+  <component name="RunManager" selected="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
+    </configuration>
+    <configuration name="DocumentControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.documents.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.documents.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerTest" />
+      <option name="METHOD_NAME" value="uploadMultipart_and_noEntityFieldsExposed" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="OcrWorkerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ocr-worker" />
@@ -129,6 +161,12 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" />
+        <item itemvalue="JUnit.DocumentControllerTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -150,7 +188,8 @@
       <workItem from="1764764281453" duration="860000" />
       <workItem from="1766439567585" duration="6407000" />
       <workItem from="1766450111234" duration="76000" />
-      <workItem from="1766450204795" duration="485000" />
+      <workItem from="1766450204795" duration="1382000" />
+      <workItem from="1766677297337" duration="305000" />
     </task>
     <servers />
   </component>
@@ -159,6 +198,10 @@
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
+    {
+      "branch": "SP5-1",
+      "currentBranchFilter": true
+    },
     {
       "branch": "SP5-1",
       "currentBranchFilter": true
