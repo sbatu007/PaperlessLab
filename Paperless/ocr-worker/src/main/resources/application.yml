@@ -12,5 +12,17 @@ app:
     access-key: ${MINIO_ACCESS_KEY:paperless}
     secret-key: ${MINIO_SECRET_KEY:paperlesssecret}
     bucket: ${MINIO_BUCKET:documents}
+
+# Gemini AI Configuration
+GOOGLE_API_KEY: ${GOOGLE_API_KEY:}
+GENAI_BASE_URL: https://generativelanguage.googleapis.com/v1beta
+GENAI_MODEL: gemini-2.5-flash-lite
+GENAI_MAX_OUTPUT_TOKENS: 250
+GENAI_TEMPERATURE: 0.4
+
+logging:
+  level:
+    com.paperlesslab.paperless: DEBUG
+
 server:
   port: 8082

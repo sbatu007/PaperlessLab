@@ -1,6 +1,7 @@
 package com.paperlesslab.paperless.controller;
 
 import com.paperlesslab.paperless.dto.DocumentDto;
+import com.paperlesslab.paperless.dto.GenAiResultMessage;
 import com.paperlesslab.paperless.mapper.DocumentMapper;
 import com.paperlesslab.paperless.minio.FileStorageService;
 import com.paperlesslab.paperless.service.DocumentService;
@@ -119,6 +120,23 @@ public class DocumentController {
         Document updated = documentService.updateDescription(id, description);
         return ResponseEntity.ok(DocumentMapper.toDto(updated));
     }
+
+    @PatchMapping("/{id}/ocr-result")
+    public ResponseEntity<DocumentDto> updateOcrResult(
+            @PathVariable Long id,
+            @RequestBody GenAiResultMessage result) {
+
+        //log.info("Received OCR result for document {}", id);
+
+        var updated = documentService.updateOcrAndSummary(
+                id,
+                result.ocrText(),
+                result.result()
+        );
+
+        return ResponseEntity.ok(DocumentMapper.toDto(updated));
+    }
+
 
 
     @ExceptionHandler(IllegalArgumentException.class)

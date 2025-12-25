@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import com.paperlesslab.paperless.rabbitmq.GenAiResultMessage;
+import com.paperlesslab.paperless.worker.rabbitmq.ResultProducer;
+import com.paperlesslab.paperless.worker.genai.GeminiClient;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -20,13 +23,19 @@ public class OcrService {
     private final MinioClient minioClient;
     private final String bucket;
     private final OcrEngine ocrEngine;
+    private final GeminiClient geminiClient;
+    private final ResultProducer resultProducer;
 
     public OcrService(MinioClient minioClient,
                       @Value("${app.minio.bucket}") String bucket,
-                      OcrEngine ocrEngine) {
+                      OcrEngine ocrEngine,
+                      GeminiClient geminiClient,
+                      ResultProducer resultProducer) {
         this.minioClient = minioClient;
         this.bucket = bucket;
         this.ocrEngine = ocrEngine;
+        this.geminiClient = geminiClient;
+        this.resultProducer = resultProducer;
     }
 
     public void process(DocumentUploadMessage message) {
@@ -46,13 +55,34 @@ public class OcrService {
                 Files.copy(in, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
                 String text = ocrEngine.extractText(tempFile);
-                log.info("OCR result for document {}: {}", message.documentId(), text);
+                log.info("OCR completed for documentId={}, textLength={}",
+                        message.documentId(), text.length());
+
+                String result = null;
+                try {
+                    result = geminiClient.summarizeGermanBullets(text);
+                    log.info("Generated result for documentId={} (length={})",
+                            message.documentId(),
+                            result == null ? 0 : result.length());
+                } catch (Exception e) {
+                    log.error("GenAI summarization failed for documentId={}",
+                            message.documentId(), e);
+                }
+
+                resultProducer.send(new GenAiResultMessage(
+                        message.documentId(),
+                        text,
+                        result
+                ));
+                log.info("Published GenAiResultMessage for documentId={}",
+                        message.documentId());
 
                 Files.deleteIfExists(tempFile);
             }
 
         } catch (Exception e) {
-            log.error("Error during OCR processing for document {}", message.documentId(), e);
+            log.error("Error during OCR processing for document {}",
+                    message.documentId(), e);
         }
     }
 }

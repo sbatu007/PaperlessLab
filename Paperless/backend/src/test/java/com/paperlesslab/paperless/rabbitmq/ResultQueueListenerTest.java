@@ -38,7 +38,7 @@ class GenAiResultListenerTest {
 
         GenAiResultMessage message = new GenAiResultMessage(1L, "OCR content", "Result");
 
-        listener.handleOcrResult(message);
+        listener.handleGenAiResult(message);
 
         verify(documentRepository).findById(1L);
         verify(documentRepository).save(doc);
@@ -52,7 +52,7 @@ class GenAiResultListenerTest {
 
         GenAiResultMessage message = new GenAiResultMessage(99L, "text", "result");
 
-        assertThatThrownBy(() -> listener.handleOcrResult(message))
+        assertThatThrownBy(() -> listener.handleGenAiResult(message))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("Document not found");
     }

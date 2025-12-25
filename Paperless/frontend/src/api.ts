@@ -2,7 +2,9 @@
 export type DocumentDto = {
     id: number;
     filename: string;
-    description?: string | null;
+    description?: string;
+    ocrText?: string;
+    result?: string;
 };
 
 const base = "/api";

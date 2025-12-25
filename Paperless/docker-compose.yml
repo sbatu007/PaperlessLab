@@ -65,6 +65,8 @@ services:
       MINIO_ACCESS_KEY: paperless
       MINIO_SECRET_KEY: paperlesssecret
       MINIO_BUCKET: documents
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      GENAI_MODEL: gemini-2.5-flash-lite
     ports:
       - "8082:8082"
     networks: [ paperless-net ]
