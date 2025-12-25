@@ -11,16 +11,35 @@ export default function Detail() {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
 
+    const loadDocument = async () => {
+        try {
+            const data = await getDocument(Number(id));
+            setDoc(data);
+            setDesc(data.description ?? "");
+        } catch (e) {
+            setError((e as Error).message);
+        }
+    };
+
     useEffect(() => {
-        (async () => {
+        if (!id) return;
+
+        loadDocument();
+
+        const interval = setInterval(async () => {
             try {
                 const data = await getDocument(Number(id));
-                setDoc(data);
-                setDesc(data.description ?? "");
+                if (data.result) {
+                    setDoc(data);
+                    setDesc(data.description ?? "");
+                    clearInterval(interval);
+                }
             } catch (e) {
-                setError((e as Error).message);
+                console.error("Polling error:", e);
             }
-        })();
+        }, 5000);
+
+        return () => clearInterval(interval);
     }, [id]);
 
     async function onSave() {
@@ -52,17 +71,14 @@ export default function Detail() {
 
             <div className="panel-body">
 
-                {/* Erfolgs- / Fehlermeldungen */}
                 {success && <div className="alert success">{success}</div>}
                 {error && <div className="alert error">{error}</div>}
 
-                {/* Titel */}
                 <div className="field">
                     <label className="label">Titel:</label>
                     <div className="filename-box">{doc.filename}</div>
                 </div>
 
-                {/* Beschreibung */}
                 <div className="field">
                     <label className="label">Beschreibung:</label>
                     <input
@@ -73,7 +89,13 @@ export default function Detail() {
                     />
                 </div>
 
-                {/* Buttons */}
+                <div className="field">
+                    <label className="label">Summary:</label>
+                    <div className="filename-box" style={{whiteSpace: "pre-wrap"}}>
+                        {doc.result ? doc.result : "(noch keine Zusammenfassung – OCR/GenAI läuft …)"}
+                    </div>
+                </div>
+
                 <div className="actions">
                     <button className="btn primary" onClick={onSave} disabled={busy}>
                         {busy ? "Saving…" : "Save"}
