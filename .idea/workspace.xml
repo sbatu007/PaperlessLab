@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/mapper/DocumentMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/GenAiResultMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/ResultQueueListenerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -64,8 +61,9 @@
   "keyToString": {
     "Docker.Paperless: Compose Deployment.executor": "Run",
     "JUnit.DocumentControllerTest.executor": "Run",
-    "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Debug",
+    "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Run",
     "JUnit.DocumentMapperTest.executor": "Run",
+    "JUnit.GenAiResultListenerTest.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -94,6 +92,9 @@
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.paperlesslab.paperless.rabbitmq" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -105,7 +106,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DocumentControllerTest">
+  <component name="RunManager" selected="JUnit.GenAiResultListenerTest">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -158,11 +159,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RabbitConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GenAiResultListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Paperless" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.paperlesslab.paperless.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.rabbitmq.GenAiResultListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RabbitConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.dto.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -202,6 +218,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GenAiResultListenerTest" />
         <item itemvalue="JUnit.DocumentControllerTest" />
         <item itemvalue="JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed" />
         <item itemvalue="JUnit.DocumentMapperTest" />
@@ -230,7 +247,7 @@
       <workItem from="1766439567585" duration="6407000" />
       <workItem from="1766450111234" duration="76000" />
       <workItem from="1766450204795" duration="1382000" />
-      <workItem from="1766677297337" duration="3588000" />
+      <workItem from="1766677297337" duration="4568000" />
     </task>
     <servers />
   </component>
