@@ -14,11 +14,20 @@ backend/.mvn/wrapper/maven-wrapper.jar
 .sts4-cache
 
 ### IntelliJ IDEA ###
+.idea/workspace.xml
 .idea/
 **/.idea/
 *.iws
 *.iml
 *.ipr
+
+### Data folder ###
+data/
+
+### Environment files ###
+**/.env
+.env
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
