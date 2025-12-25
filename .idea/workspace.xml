@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/maven-build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application-test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +66,7 @@
     "JUnit.GenAiResultListenerTest.executor": "Run",
     "JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage.executor": "Run",
     "JUnit.OcrTextCleanerTest.executor": "Run",
+    "JUnit.OcrWorkerApplicationTests.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -110,27 +110,12 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage">
+  <component name="RunManager" selected="JUnit.OcrWorkerApplicationTests">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
-    </configuration>
-    <configuration name="DocumentControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Paperless" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.documents.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="GeminiClientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ocr-worker" />
@@ -193,6 +178,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OcrWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ocr-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrWorkerApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OcrWorkerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ocr-worker" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.worker.OcrWorkerApplication" />
@@ -222,11 +222,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OcrWorkerApplicationTests" />
         <item itemvalue="JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage" />
         <item itemvalue="JUnit.OcrTextCleanerTest" />
         <item itemvalue="JUnit.GenAiResultListenerTest" />
         <item itemvalue="JUnit.GeminiClientTest" />
-        <item itemvalue="JUnit.DocumentControllerTest" />
       </list>
     </recent_temporary>
   </component>
