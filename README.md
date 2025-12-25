@@ -1,4 +1,4 @@
-# Paperless – Semester Project 
+# Paperless – Semester Project
 This repository contains the Paperless semester project for the course SWEN3 (BIF5).  
 Sprint 3 implements the first fully integrated version of the Document Management System using:
 
@@ -89,6 +89,43 @@ The system consists of five services, orchestrated via Docker Compose.
 ## Requirements
 - Docker
 - Docker Compose
+
+## Environment variables (.env)
+
+For the GenAI (Gemini) summarization you need to provide a Google API key and (optionally) override the default GenAI settings.
+
+1. Copy the template:
+
+```bash
+cp .env.sample .env
+```
+
+2. Edit `.env` and set at least `GOOGLE_API_KEY`:
+
+```env
+GOOGLE_API_KEY=
+
+# Gemini API Base URL (Standard)
+GENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
+
+# Modell
+GENAI_MODEL=gemini-2.5-flash-lite
+
+# Antwortlänge (ausreichend für Bullet Summary)
+GENAI_MAX_OUTPUT_TOKENS=250
+
+GENAI_TEMPERATURE=0.4
+
+# GenAI Debug Logging
+# Loggt Prompt-Länge + Vorschau
+GENAI_LOG_REQUEST=true
+
+# Loggt Antwort-Vorschau
+GENAI_LOG_RESPONSE=true
+```
+
+> **Security note:** Never commit your `.env` file or API keys to git.
+
 
 Start all services:
 

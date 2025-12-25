@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public record GenAiResultMessage(
         Long documentId,
-        String result,
-        String ocrText
+        String ocrText,
+        String result
 ) implements Serializable {}

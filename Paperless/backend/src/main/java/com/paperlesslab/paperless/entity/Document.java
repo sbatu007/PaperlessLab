@@ -2,13 +2,12 @@ package com.paperlesslab.paperless.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "documents")
@@ -38,5 +37,10 @@ public class Document {
     @Column(name = "result", columnDefinition = "TEXT")
     private String result;
 
-
+    @PrePersist
+    public void prePersist() {
+        if (uploadedAt == null) {
+            uploadedAt = LocalDateTime.now();
+        }
+    }
 }
