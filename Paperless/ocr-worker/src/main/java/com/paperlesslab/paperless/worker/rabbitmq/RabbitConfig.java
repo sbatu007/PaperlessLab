@@ -12,6 +12,7 @@ public class RabbitConfig {
 
     public static final String OCR_QUEUE = "OCR_QUEUE";
     public static final String RESULT_QUEUE = "RESULT_QUEUE";
+    public static final String INDEX_QUEUE = "INDEX_QUEUE";
 
     @Bean
     public Queue ocrQueue() {
@@ -23,6 +24,10 @@ public class RabbitConfig {
         return new Queue(RESULT_QUEUE, true);
     }
 
+    @Bean
+    public Queue indexQueue() {
+        return new Queue(INDEX_QUEUE, true);
+    }
     @Bean
     public MessageConverter jacksonMessageConverter() {
         return new Jackson2JsonMessageConverter();
