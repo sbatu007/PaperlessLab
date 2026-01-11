@@ -1,9 +1,6 @@
 package com.paperlesslab.paperless.minio;
 
-import io.minio.BucketExistsArgs;
-import io.minio.MakeBucketArgs;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
+import io.minio.*;
 import io.minio.errors.MinioException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +63,19 @@ public class FileStorageService {
                     MakeBucketArgs.builder().bucket(bucket).build()
             );
             log.info("Created MinIO bucket '{}'", bucket);
+        }
+    }
+    public void deletePdf(String objectName) {
+        try {
+            minioClient.removeObject(
+                    RemoveObjectArgs.builder()
+                            .bucket(bucket)
+                            .object(objectName)
+                            .build()
+            );
+            log.info("Deleted file '{}' from MinIO bucket '{}'", objectName, bucket);
+        } catch (Exception e) {
+            log.warn("Could not delete '{}' from MinIO (ignored)", objectName, e);
         }
     }
 }
