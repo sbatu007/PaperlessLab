@@ -1,9 +1,7 @@
 package com.paperlesslab.paperless.service;
 
-import com.paperlesslab.paperless.dto.DocumentDto;
 import com.paperlesslab.paperless.entity.Document;
 import com.paperlesslab.paperless.errors.NotFoundException;
-import com.paperlesslab.paperless.mapper.DocumentMapper;
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import com.paperlesslab.paperless.repository.DocumentRepository;

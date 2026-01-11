@@ -1,6 +1,7 @@
 package com.paperlesslab.paperless.worker.ocr;
 
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
+import com.paperlesslab.paperless.rabbitmq.IndexMessage;
 import com.paperlesslab.paperless.worker.genai.GeminiClient;
 import com.paperlesslab.paperless.worker.rabbitmq.IndexProducer;
 import com.paperlesslab.paperless.worker.rabbitmq.ResultProducer;
@@ -47,7 +48,7 @@ class OcrServicePublishTest {
         svc.process(new DocumentUploadMessage(1L, "HelloWorld.pdf", "desc"));
 
         // verify index publish
-        var captor = org.mockito.ArgumentCaptor.forClass(com.paperlesslab.paperless.rabbitmq.IndexMessage.class);
+        var captor = org.mockito.ArgumentCaptor.forClass(IndexMessage.class);
         verify(indexProducer, times(1)).send(captor.capture());
 
         var msg = captor.getValue();

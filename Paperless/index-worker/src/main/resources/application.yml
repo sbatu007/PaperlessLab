@@ -1,0 +1,9 @@
+server:
+  port: 8083
+
+spring:
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:rabbitmq}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    username: ${SPRING_RABBITMQ_USERNAME:paperless}
+    password: ${SPRING_RABBITMQ_PASSWORD:secret}
