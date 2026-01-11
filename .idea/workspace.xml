@@ -4,28 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/DocumentIndex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/DocumentIndexRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/ElasticConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/IndexService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/indexworker/elasticsearch/IndexServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/rabbitmq/IndexMessageListenerTest.java" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch">
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/SearchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/search/IndexedDocumentView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentSearchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/service/DocumentSearchServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitMqProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitMqProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListenerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListenerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/IndexMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/ressources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +24,8 @@
       <list>
         <option value="Dockerfile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -91,6 +78,7 @@
     "JUnit.DocumentControllerTest.executor": "Run",
     "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Run",
     "JUnit.DocumentMapperTest.executor": "Run",
+    "JUnit.DocumentSearchServiceTest.executor": "Run",
     "JUnit.GeminiClientTest.executor": "Run",
     "JUnit.GenAiResultListenerTest.executor": "Run",
     "JUnit.IndexMessageListenerTest.executor": "Run",
@@ -102,6 +90,7 @@
     "JUnit.OcrWorkerApplicationTests.executor": "Run",
     "JUnit.PaperlessApplicationTests.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
+    "JUnit.RabbitMqProducerTest.executor": "Run",
     "Maven.Paperless [clean].executor": "Run",
     "Maven.Paperless [install].executor": "Run",
     "Maven.Paperless [package].executor": "Run",
@@ -171,12 +160,27 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RabbitMqProducerTest">
+  <component name="RunManager" selected="JUnit.DocumentSearchServiceTest">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
+    </configuration>
+    <configuration name="DocumentSearchServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.service" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.service.DocumentSearchServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="GenAiResultListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Paperless" />
@@ -218,21 +222,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.indexworker.elasticsearch" />
       <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.indexworker.elasticsearch.IndexServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IndexWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="index-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.IndexWorkerApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -317,11 +306,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DocumentSearchServiceTest" />
         <item itemvalue="JUnit.RabbitMqProducerTest" />
         <item itemvalue="JUnit.GenAiResultListenerTest" />
         <item itemvalue="JUnit.IndexMessageListenerTest" />
         <item itemvalue="JUnit.IndexServiceTest" />
-        <item itemvalue="JUnit.IndexWorkerApplicationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -350,7 +339,7 @@
       <workItem from="1768087231297" duration="470000" />
       <workItem from="1768087963245" duration="3047000" />
       <workItem from="1768091083322" duration="20000" />
-      <workItem from="1768091184627" duration="9963000" />
+      <workItem from="1768091184627" duration="11170000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -360,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768100370542</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch">
+      <option name="closed" value="true" />
+      <created>1768105364712</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768105364712</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +365,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
+    <MESSAGE value="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [

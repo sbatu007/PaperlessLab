@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update     # erstellt automatisch Tabellen, passt sich an Entities an
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -17,12 +17,15 @@ spring:
       max-request-size: 25MB
   jackson:
     serialization:
-      INDENT_OUTPUT: true   # formatiert JSON-Ausgaben schön
+      INDENT_OUTPUT: true
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST:localhost}
     port: ${SPRING_RABBITMQ_PORT:5672}
     username: ${SPRING_RABBITMQ_USERNAME:guest}
     password: ${SPRING_RABBITMQ_PASSWORD:guest}
+
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
 
 app:
   minio:

@@ -19,18 +19,18 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
-    healthcheck:
-      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
-      interval: 5s
-      timeout: 10s
-      retries: 10
     container_name: paperless-rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: paperless
       RABBITMQ_DEFAULT_PASS: secret
     ports:
-      - "5672:5672"      # AMQP
-      - "9093:15672"     # Management UI
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_port_connectivity" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
     networks: [ paperless-net ]
 
   minio:
@@ -56,8 +56,10 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
       - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null || exit 1"]
+      test: [ "CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -76,8 +78,7 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: paperless
       SPRING_RABBITMQ_PASSWORD: secret
-
-      ELASTICSEARCH_URIS: http://elasticsearch:9200
+      SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
     networks: [ paperless-net ]
 
   ocr-worker:
@@ -93,7 +94,6 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: paperless
       SPRING_RABBITMQ_PASSWORD: secret
-
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: paperless
       MINIO_SECRET_KEY: paperlesssecret
@@ -102,15 +102,6 @@ services:
       GENAI_MODEL: gemini-2.5-flash-lite
     ports:
       - "8082:8082"
-    networks: [ paperless-net ]
-
-  adminer:
-    image: adminer
-    container_name: paperless-adminer
-    ports:
-      - "9091:8080"
-    depends_on:
-      - db
     networks: [ paperless-net ]
 
   rest-api:
@@ -122,16 +113,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/paperless
       SPRING_DATASOURCE_USERNAME: paperless_user
       SPRING_DATASOURCE_PASSWORD: secret
-
       SERVER_PORT: 8081
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
-
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: paperless
       SPRING_RABBITMQ_PASSWORD: secret
-
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: paperless
       MINIO_SECRET_KEY: paperlesssecret
@@ -139,6 +127,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    ports:
+      - "8081:8081"
     volumes:
       - ./data/uploads:/app/uploads
     networks: [ paperless-net ]
@@ -154,6 +144,15 @@ services:
       - rest-api
     networks: [ paperless-net ]
 
+  adminer:
+    image: adminer
+    container_name: paperless-adminer
+    ports:
+      - "9091:8080"
+    depends_on:
+      - db
+    networks: [ paperless-net ]
+
 networks:
   paperless-net:
     name: paperless-net
@@ -162,3 +161,4 @@ networks:
 volumes:
   db_data:
   minio_data:
+  es_data:
