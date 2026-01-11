@@ -7,3 +7,10 @@ spring:
     port: ${SPRING_RABBITMQ_PORT:5672}
     username: ${SPRING_RABBITMQ_USERNAME:paperless}
     password: ${SPRING_RABBITMQ_PASSWORD:secret}
+
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
+
+logging:
+  level:
+    root: INFO

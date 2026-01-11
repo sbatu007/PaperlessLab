@@ -4,32 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/IndexWorkerApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/IndexMessageListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/RabbitConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/IndexWorkerApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/ressources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/maven-build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/DocumentIndex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/DocumentIndexRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/ElasticConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/elasticsearch/IndexService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/indexworker/elasticsearch/IndexServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/rabbitmq/IndexMessageListenerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/minio/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/minio/FileStorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentServiceMessagingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentServiceMessagingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/ocr/OcrServicePublishTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/test/java/com/paperlesslab/paperless/worker/ocr/OcrServicePublishTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitMqProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitMqProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListenerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/rabbitmq/GenAiResultListenerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/IndexMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/indexworker/rabbitmq/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/RabbitConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/ressources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/rabbitmq/IndexMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/ocr-worker/src/main/java/com/paperlesslab/paperless/worker/ocr/OcrService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,10 +35,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Record" />
-        <option value="Class" />
         <option value="Dockerfile" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -97,6 +93,8 @@
     "JUnit.DocumentMapperTest.executor": "Run",
     "JUnit.GeminiClientTest.executor": "Run",
     "JUnit.GenAiResultListenerTest.executor": "Run",
+    "JUnit.IndexMessageListenerTest.executor": "Run",
+    "JUnit.IndexServiceTest.executor": "Run",
     "JUnit.IndexWorkerApplicationTests.executor": "Run",
     "JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage.executor": "Run",
     "JUnit.OcrServicePublishTest.executor": "Run",
@@ -173,12 +171,57 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PaperlessApplicationTests">
+  <component name="RunManager" selected="JUnit.RabbitMqProducerTest">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
+    </configuration>
+    <configuration name="GenAiResultListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.rabbitmq.GenAiResultListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexMessageListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="index-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.indexworker.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.indexworker.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.indexworker.rabbitmq.IndexMessageListenerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="index-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.indexworker.elasticsearch.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.indexworker.elasticsearch" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.indexworker.elasticsearch.IndexServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="IndexWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="index-worker" />
@@ -195,62 +238,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OcrServicePipelineTest.afterOcrItPublishesSummaryMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrServicePipelineTest" />
-      <option name="METHOD_NAME" value="afterOcrItPublishesSummaryMessage" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OcrServicePublishTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.ocr.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker.ocr" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.ocr.OcrServicePublishTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OcrWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrWorkerApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PaperlessApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RabbitMqProducerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Paperless" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.rabbitmq.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.PaperlessApplicationTests" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.rabbitmq.RabbitMqProducerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -320,11 +317,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PaperlessApplicationTests" />
+        <item itemvalue="JUnit.RabbitMqProducerTest" />
+        <item itemvalue="JUnit.GenAiResultListenerTest" />
+        <item itemvalue="JUnit.IndexMessageListenerTest" />
+        <item itemvalue="JUnit.IndexServiceTest" />
         <item itemvalue="JUnit.IndexWorkerApplicationTests" />
-        <item itemvalue="JUnit.OcrServicePublishTest" />
-        <item itemvalue="JUnit.OcrWorkerApplicationTests" />
-        <item itemvalue="JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage" />
       </list>
     </recent_temporary>
   </component>
@@ -353,12 +350,25 @@
       <workItem from="1768087231297" duration="470000" />
       <workItem from="1768087963245" duration="3047000" />
       <workItem from="1768091083322" duration="20000" />
-      <workItem from="1768091184627" duration="5085000" />
+      <workItem from="1768091184627" duration="9963000" />
     </task>
+    <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
+      <option name="closed" value="true" />
+      <created>1768100370542</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768100370542</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [

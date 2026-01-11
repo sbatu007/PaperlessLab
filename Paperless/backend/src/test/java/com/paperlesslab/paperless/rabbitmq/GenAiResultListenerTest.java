@@ -23,6 +23,9 @@ class GenAiResultListenerTest {
     @Mock
     private DocumentRepository documentRepository;
 
+    @Mock
+    private RabbitMqProducer producer;  // NEU
+
     @InjectMocks
     private GenAiResultListener listener;
 
@@ -49,6 +52,14 @@ class GenAiResultListenerTest {
         Document saved = captor.getValue();
         assertThat(saved.getOcrText()).isEqualTo("OCR content");
         assertThat(saved.getResult()).isEqualTo("Result");
+
+        // NEU: Verifiziere, dass IndexMessage gesendet wurde
+        verify(producer).sendIndexMessage(argThat(im ->
+                im.documentId().equals(1L)
+                        && im.filename().equals("test.pdf")
+                        && im.ocrText().equals("OCR content")
+                        && im.result().equals("Result")
+        ));
     }
 
     @Test
@@ -63,5 +74,27 @@ class GenAiResultListenerTest {
 
         verify(documentRepository).findById(99L);
         verify(documentRepository, never()).save(any());
+        verify(producer, never()).sendIndexMessage(any());  // NEU
+    }
+
+    @Test
+    void publishesIndexMessageAfterSaving() {
+        Document doc = new Document();
+        doc.setId(1L);
+        doc.setFilename("HelloWorld.pdf");
+
+        when(documentRepository.findById(1L)).thenReturn(Optional.of(doc));
+        when(documentRepository.save(any(Document.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        GenAiResultMessage msg = new GenAiResultMessage(1L, "Hello World", "Summary");
+        listener.handleGenAiResult(msg);
+
+        verify(documentRepository).save(any(Document.class));
+        verify(producer).sendIndexMessage(argThat(im ->
+                im.documentId().equals(1L)
+                        && im.filename().equals("HelloWorld.pdf")
+                        && im.ocrText().equals("Hello World")
+                        && im.result().equals("Summary")  // NEU
+        ));
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class GenAiResultListener {
 
     private final DocumentRepository documentRepository;
+    private final RabbitMqProducer producer;
+
 
     @RabbitListener(queues = RabbitConfig.RESULT_QUEUE)
     public void handleGenAiResult(GenAiResultMessage message) {
@@ -34,5 +36,12 @@ public class GenAiResultListener {
 
         documentRepository.save(doc);
         log.info("Updated document {} with OCR and result", message.documentId());
+
+        producer.sendIndexMessage(new IndexMessage(
+                doc.getId(),
+                doc.getFilename(),
+                doc.getOcrText(),
+                doc.getResult()
+        ));
     }
 }

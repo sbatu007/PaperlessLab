@@ -85,7 +85,8 @@ public class OcrService {
                 indexProducer.send(new IndexMessage(
                         message.documentId(),
                         message.filename(),
-                        text
+                        text,
+                        result
                 ));
 
                 log.info("Published GenAiResultMessage + IndexMessage for documentId={}",
