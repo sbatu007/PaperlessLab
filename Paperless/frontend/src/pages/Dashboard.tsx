@@ -72,7 +72,6 @@ export default function Dashboard() {
             </div>
 
             <div className="panel-body">
-                {/* ✅ Search UI (Sprint 6 requirement) */}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
                     <input
                         value={query}
@@ -119,7 +118,6 @@ export default function Dashboard() {
                     </div>
                 )}
 
-                {/* Existing list UI */}
                 {docs.length === 0 ? (
                     <div>No documents yet.</div>
                 ) : (
@@ -139,8 +137,11 @@ export default function Dashboard() {
                                         <Link to={`/detail/${d.id}`}>{d.filename}</Link>
                                         {d.description ? <span className="muted"> — {d.description}</span> : null}
                                     </div>
-                                    <div className="col-tags"></div>
-                                    <div className="col-actions">
+                                    <div className="col-tags">
+                                        {(d.labels ?? []).map(l => (
+                                            <span key={l.id} className="tag">{l.name}</span>
+                                        ))}
+                                    </div>                                    <div className="col-actions">
                                         <Link className="btn small" to={`/detail/${d.id}`}>Open</Link>
                                         <button className="btn small danger" onClick={() => void onDelete(d.id)}>Delete</button>
                                     </div>

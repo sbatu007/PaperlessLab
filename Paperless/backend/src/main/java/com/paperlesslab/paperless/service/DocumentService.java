@@ -6,6 +6,7 @@ import com.paperlesslab.paperless.minio.FileStorageService;
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import com.paperlesslab.paperless.repository.DocumentRepository;
+import com.paperlesslab.paperless.repository.LabelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class DocumentService {
     private final RabbitMqProducer rabbitMqProducer;
     private final FileStorageService fileStorageService;
     private final SearchIndexService searchIndexService;
+    private final LabelRepository labelRepository;
 
     @Transactional(readOnly = true)
     public List<Document> list() {
@@ -86,6 +88,20 @@ public class DocumentService {
 
         if (ocrText != null) doc.setOcrText(ocrText);
         if (summary != null) doc.setResult(summary);
+
+        return repository.save(doc);
+    }
+
+    public Document setLabels(Long docId, List<Long> labelIds) {
+        var doc = repository.findById(docId)
+                .orElseThrow(() -> new NotFoundException("Document %d not found".formatted(docId)));
+
+        doc.getLabels().clear();
+
+        if (labelIds != null && !labelIds.isEmpty()) {
+            var labels = labelRepository.findAllById(labelIds);
+            doc.getLabels().addAll(labels);
+        }
 
         return repository.save(doc);
     }
