@@ -1,0 +1,23 @@
+spring:
+  main:
+    lazy-initialization: true
+
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
+        missingQueuesFatal: false
+      direct:
+        auto-startup: false
+
+  data:
+    elasticsearch:
+      repositories:
+        enabled: false
+
+  elasticsearch:
+    uris: http://localhost:9200
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration

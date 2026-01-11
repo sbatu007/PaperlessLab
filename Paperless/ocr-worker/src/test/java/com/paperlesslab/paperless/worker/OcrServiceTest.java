@@ -4,6 +4,7 @@ import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.worker.genai.GeminiClient;
 import com.paperlesslab.paperless.worker.ocr.OcrEngine;
 import com.paperlesslab.paperless.worker.ocr.OcrService;
+import com.paperlesslab.paperless.worker.rabbitmq.IndexProducer;
 import com.paperlesslab.paperless.worker.rabbitmq.ResultProducer;
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
@@ -23,6 +24,8 @@ class OcrServiceTest {
         OcrEngine ocrEngine = mock(OcrEngine.class);
         GeminiClient geminiClient = mock(GeminiClient.class);
         ResultProducer resultProducer = mock(ResultProducer.class);
+        IndexProducer indexProducer = mock(IndexProducer.class);
+
 
         GetObjectResponse response = mock(GetObjectResponse.class);
         when(response.read(any(byte[].class))).thenReturn(-1);
@@ -42,7 +45,8 @@ class OcrServiceTest {
                 "documents",
                 ocrEngine,
                 geminiClient,
-                resultProducer
+                resultProducer,
+                indexProducer
         );
 
         DocumentUploadMessage message = new DocumentUploadMessage(

@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.HashSet;
+import java.util.Set;
+
 
 import java.time.LocalDateTime;
 
@@ -43,4 +46,11 @@ public class Document {
             uploadedAt = LocalDateTime.now();
         }
     }
+    @ManyToMany
+    @JoinTable(
+            name = "document_labels",
+            joinColumns = @JoinColumn(name = "document_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id")
+    )
+    private Set<Label> labels = new HashSet<>();
 }

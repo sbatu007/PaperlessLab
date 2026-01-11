@@ -2,9 +2,11 @@ package com.paperlesslab.paperless.worker;
 
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.rabbitmq.GenAiResultMessage;
+import com.paperlesslab.paperless.rabbitmq.IndexMessage;
 import com.paperlesslab.paperless.worker.genai.GeminiClient;
 import com.paperlesslab.paperless.worker.ocr.OcrEngine;
 import com.paperlesslab.paperless.worker.ocr.OcrService;
+import com.paperlesslab.paperless.worker.rabbitmq.IndexProducer;
 import com.paperlesslab.paperless.worker.rabbitmq.ResultProducer;
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
@@ -25,6 +27,7 @@ class OcrServicePipelineTest {
         OcrEngine engine = mock(OcrEngine.class);
         GeminiClient gemini = mock(GeminiClient.class);
         ResultProducer producer = mock(ResultProducer.class);
+        IndexProducer indexProducer = mock(IndexProducer.class);
 
         GetObjectResponse response = mock(GetObjectResponse.class);
         when(response.read(any(byte[].class))).thenReturn(-1);
@@ -34,7 +37,7 @@ class OcrServicePipelineTest {
         when(engine.extractText(any())).thenReturn("ocr text");
         when(gemini.summarizeGermanBullets("ocr text")).thenReturn("result");
 
-        OcrService service = new OcrService(minio, "documents", engine, gemini, producer);
+        OcrService service = new OcrService(minio, "documents", engine, gemini, producer, indexProducer);
 
         service.process(new DocumentUploadMessage(1L, "test.pdf", "desc"));
 
@@ -46,6 +49,14 @@ class OcrServicePipelineTest {
         assertEquals(1L, sent.documentId());
         assertEquals("result", sent.result());
         assertEquals("ocr text", sent.ocrText());
+
+        ArgumentCaptor<IndexMessage> indexCaptor = ArgumentCaptor.forClass(IndexMessage.class);
+        verify(indexProducer, times(1)).send(indexCaptor.capture());
+
+        IndexMessage indexed = indexCaptor.getValue();
+        assertEquals(1L, indexed.documentId());
+        assertEquals("test.pdf", indexed.filename());
+        assertEquals("ocr text", indexed.ocrText());
     }
 
     @Test
@@ -54,6 +65,7 @@ class OcrServicePipelineTest {
         OcrEngine engine = mock(OcrEngine.class);
         GeminiClient gemini = mock(GeminiClient.class);
         ResultProducer producer = mock(ResultProducer.class);
+        IndexProducer indexProducer = mock(IndexProducer.class);
 
         GetObjectResponse response = mock(GetObjectResponse.class);
         when(response.read(any(byte[].class))).thenReturn(-1);
@@ -63,7 +75,7 @@ class OcrServicePipelineTest {
         when(engine.extractText(any())).thenReturn("ocr text");
         when(gemini.summarizeGermanBullets("ocr text")).thenThrow(new RuntimeException("API Error"));
 
-        OcrService service = new OcrService(minio, "documents", engine, gemini, producer);
+        OcrService service = new OcrService(minio, "documents", engine, gemini, producer, indexProducer);
 
         service.process(new DocumentUploadMessage(1L, "test.pdf", "desc"));
 
@@ -74,5 +86,7 @@ class OcrServicePipelineTest {
         assertEquals(1L, sent.documentId());
         assertNull(sent.result());
         assertEquals("ocr text", sent.ocrText());
+
+        verify(indexProducer, times(1)).send(any(IndexMessage.class));
     }
 }

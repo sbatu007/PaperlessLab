@@ -20,4 +20,8 @@ public class RabbitMqProducer {
         log.info("Sending OCR job to queue {}: {}", RabbitConfig.OCR_QUEUE, message);
         rabbitTemplate.convertAndSend(RabbitConfig.OCR_QUEUE, message);
     }
+    public void sendIndexMessage(IndexMessage message) {
+        log.info("Sending INDEX job to queue {}: documentId={}", RabbitConfig.INDEX_QUEUE, message.documentId());
+        rabbitTemplate.convertAndSend(RabbitConfig.INDEX_QUEUE, message);
+    }
 }

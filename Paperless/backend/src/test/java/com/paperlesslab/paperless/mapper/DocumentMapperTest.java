@@ -5,6 +5,8 @@ import com.paperlesslab.paperless.entity.Document;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +22,8 @@ class DocumentMapperTest {
                 "desc",
                 LocalDateTime.now(),
                 "OCR content",
-                "Result content"
+                "Result content",
+                Set.of()
         );
 
         DocumentDto dto = mapper.toDto(entity);
@@ -30,11 +33,13 @@ class DocumentMapperTest {
         assertThat(dto.description()).isEqualTo("desc");
         assertThat(dto.ocrText()).isEqualTo("OCR content");
         assertThat(dto.result()).isEqualTo("Result content");
+        assertThat(dto.labels()).isNotNull();
+        assertThat(dto.labels()).isEmpty();
     }
 
     @Test
     void toEntity_mapsAllFields() {
-        DocumentDto dto = new DocumentDto(2L, "file.pdf", "description", "OCR", "Result");
+        DocumentDto dto = new DocumentDto(2L, "file.pdf", "description", "OCR", "Result", List.of());
 
         Document entity = mapper.toEntity(dto);
 
@@ -47,7 +52,7 @@ class DocumentMapperTest {
 
     @Test
     void toEntity_withNullOptionalFields_doesNotSetThem() {
-        DocumentDto dto = new DocumentDto(null, "file.pdf", "description", null, null);
+        DocumentDto dto = new DocumentDto(null, "file.pdf", "description", null, null, List.of());
 
         Document entity = mapper.toEntity(dto);
 

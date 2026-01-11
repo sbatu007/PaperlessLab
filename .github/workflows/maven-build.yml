@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" , "SP5-final"]
+    branches: [ "main" , "SP6"]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,25 @@ jobs:
         with:
           name: ocr-worker
           path: Paperless/ocr-worker/target/*.jar
+
+  build-index-worker:
+    name: Build Index Worker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build Index Worker with Maven
+        run: mvn -B package --file Paperless/index-worker/pom.xml
+      - name: Upload Index Worker Artifact
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: index-worker
+          path: Paperless/index-worker/target/*.jar
 
   build-frontend:
     name: Build Frontend

@@ -15,6 +15,8 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -31,7 +33,7 @@ class DocumentControllerTest {
 
     @Test
     void create_list_get_delete_exposesOnlyDtoFields() throws Exception {
-        var dto = new DocumentDto(null, "abc.pdf", "hello", null, null);
+        var dto = new DocumentDto(null, "abc.pdf", "hello", null, null, List.of());
 
         var create = mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -83,7 +85,7 @@ class DocumentControllerTest {
 
     @Test
     void updateDescription_viaPut_returnsUpdatedDto() throws Exception {
-        var initial = new DocumentDto(null, "update-me.pdf", "old", null, null);
+        var initial = new DocumentDto(null, "update-me.pdf", "old", null, null, List.of());
         var createResult = mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(initial)))
@@ -108,7 +110,7 @@ class DocumentControllerTest {
 
     @Test
     void create_withEmptyFilename_returnsBadRequestWithFieldError() throws Exception {
-        var invalid = new DocumentDto(null, "   ", "desc", null, null);
+        var invalid = new DocumentDto(null, "   ", "desc", null, null, List.of());
 
         mvc.perform(post("/documents")
                         .contentType(MediaType.APPLICATION_JSON)

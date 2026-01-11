@@ -1,29 +1,31 @@
 package com.paperlesslab.paperless.service;
 
-import com.paperlesslab.paperless.dto.DocumentDto;
 import com.paperlesslab.paperless.entity.Document;
 import com.paperlesslab.paperless.errors.NotFoundException;
-import com.paperlesslab.paperless.mapper.DocumentMapper;
+import com.paperlesslab.paperless.minio.FileStorageService;
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import com.paperlesslab.paperless.repository.DocumentRepository;
+import com.paperlesslab.paperless.repository.LabelRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class DocumentService {
 
     private final DocumentRepository repository;
     private final RabbitMqProducer rabbitMqProducer;
-
-    public DocumentService(DocumentRepository repository,  RabbitMqProducer rabbitMqProducer) {
-        this.repository = repository;
-        this.rabbitMqProducer = rabbitMqProducer;
-    }
-
+    private final FileStorageService fileStorageService;
+    private final SearchIndexService searchIndexService;
+    private final LabelRepository labelRepository;
 
     @Transactional(readOnly = true)
     public List<Document> list() {
@@ -50,10 +52,22 @@ public class DocumentService {
     }
 
     public void delete(Long id) {
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("Document %d not found".formatted(id));
+        Document doc = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Document %d not found".formatted(id)));
+
+        repository.delete(doc);
+
+        try {
+            Path uploads = Paths.get("uploads");
+            Path p = uploads.resolve(doc.getFilename());
+            Files.deleteIfExists(p);
+        } catch (Exception e) {
+            // soll nicht blockieren
         }
-        repository.deleteById(id);
+
+        fileStorageService.deletePdf(doc.getFilename());
+
+        searchIndexService.deleteFromIndex(id);
     }
 
     public Document updateDescription(Long id, String description) {
@@ -78,5 +92,17 @@ public class DocumentService {
         return repository.save(doc);
     }
 
+    public Document setLabels(Long docId, List<Long> labelIds) {
+        var doc = repository.findById(docId)
+                .orElseThrow(() -> new NotFoundException("Document %d not found".formatted(docId)));
 
+        doc.getLabels().clear();
+
+        if (labelIds != null && !labelIds.isEmpty()) {
+            var labels = labelRepository.findAllById(labelIds);
+            doc.getLabels().addAll(labels);
+        }
+
+        return repository.save(doc);
+    }
 }

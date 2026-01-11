@@ -338,3 +338,71 @@ form.panel .panel-body {
   }
 }
 
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+.labels-box {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.labels-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 8px 0 14px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 999px;
+  overflow: hidden;              /* wichtig: X "drin" */
+  background: #fff;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.chip-text {
+  padding: 7px 10px;
+}
+
+.chip-x {
+  border: 0;
+  border-left: 1px solid #e6e6e6;
+  background: #fafafa;
+  cursor: pointer;
+  padding: 7px 10px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.chip-x:hover {
+  background: #f0f0f0;
+}
+
+.labels-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.labels-row .input,
+.labels-row select.input {
+  width: 100%;
+}
+
+.labels-hint {
+  margin-top: 10px;
+  text-align: center;
+}

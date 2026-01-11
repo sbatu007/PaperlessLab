@@ -1,6 +1,7 @@
 package com.paperlesslab.paperless.documents;
 
 import com.paperlesslab.paperless.entity.Document;
+import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
 import com.paperlesslab.paperless.rabbitmq.RabbitMqProducer;
 import com.paperlesslab.paperless.repository.DocumentRepository;
 import com.paperlesslab.paperless.service.DocumentService;
@@ -44,8 +45,8 @@ class DocumentServiceMessagingTest {
 
         assertThat(result.getId()).isEqualTo(1L);
 
-        ArgumentCaptor<com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage> captor =
-                ArgumentCaptor.forClass(com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage.class);
+        ArgumentCaptor<DocumentUploadMessage> captor =
+                ArgumentCaptor.forClass(DocumentUploadMessage.class);
 
         verify(rabbitMqProducer, times(1)).sendDocumentUploaded(captor.capture());
 

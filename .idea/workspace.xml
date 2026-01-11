@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this">
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/LabelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/LabelDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Label.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/repository/LabelRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/LabelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/DocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/dto/DocumentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/entity/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/mapper/DocumentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/mapper/DocumentMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/mapper/DocumentMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/service/DocumentServiceDeleteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/service/DocumentServiceDeleteTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/IndexWorkerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/com/paperlesslab/paperless/IndexWorkerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/src/test/java/resources/application-test.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +36,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="Dockerfile" />
         <option value="Record" />
+        <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -36,18 +61,28 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/sbatu007/PaperlessLab.git&quot;,
-    &quot;accountId&quot;: &quot;162c562a-2795-47c8-b240-a7f3ee48aa0d&quot;
+    &quot;accountId&quot;: &quot;a7cc960e-0239-4ed8-8b98-8501ef6341da&quot;
   }
 }</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="35fagEiJkUxbg4lO2ik5T8xdVaM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,17 +92,43 @@
     "Docker.Paperless: Compose Deployment.executor": "Run",
     "JUnit.DocumentControllerTest.executor": "Run",
     "JUnit.DocumentControllerTest.uploadMultipart_and_noEntityFieldsExposed.executor": "Run",
+    "JUnit.DocumentControllerUploadTest.executor": "Run",
     "JUnit.DocumentMapperTest.executor": "Run",
+    "JUnit.DocumentMetaServiceTest.executor": "Run",
+    "JUnit.DocumentSearchServiceTest.executor": "Run",
+    "JUnit.DocumentServiceDeleteTest.executor": "Run",
     "JUnit.GeminiClientTest.executor": "Run",
     "JUnit.GenAiResultListenerTest.executor": "Run",
+    "JUnit.IndexMessageListenerTest.executor": "Run",
+    "JUnit.IndexServiceTest.executor": "Run",
+    "JUnit.IndexWorkerApplicationTests.executor": "Run",
     "JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage.executor": "Run",
+    "JUnit.OcrServicePublishTest.executor": "Run",
     "JUnit.OcrTextCleanerTest.executor": "Run",
     "JUnit.OcrWorkerApplicationTests.executor": "Run",
+    "JUnit.PaperlessApplicationTests.executor": "Run",
     "JUnit.RabbitConfigTest.executor": "Run",
+    "JUnit.RabbitMqProducerTest.executor": "Run",
+    "Maven.Paperless [clean].executor": "Run",
+    "Maven.Paperless [install].executor": "Run",
+    "Maven.Paperless [package].executor": "Run",
+    "Maven.Paperless [test].executor": "Run",
+    "Maven.index-worker [clean].executor": "Run",
+    "Maven.index-worker [install].executor": "Run",
+    "Maven.index-worker [package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "SP5-final",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.IndexWorkerApplication (2).executor": "Run",
+    "TestNG.<default>.executor": "Run",
+    "git-widget-placeholder": "SP6",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -79,7 +140,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "C:\\Users\\janse\\IdeaProjects\\SWEN3\\Paperless\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -89,6 +150,9 @@
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\index-worker\src\test\java\resources" />
+      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\index-worker\src\main\resources" />
+      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless" />
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -105,86 +169,102 @@
         <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="IndexWorkerApplication (2)" value="FAILED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="RunManager" selected="JUnit.OcrWorkerApplicationTests">
+  <component name="RunManager" selected="JUnit.IndexWorkerApplicationTests">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="GeminiClientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.genai.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker.genai" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.genai.GeminiClientTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GenAiResultListenerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DocumentControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Paperless" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.rabbitmq.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.documents.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.rabbitmq" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.rabbitmq.GenAiResultListenerTest" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OcrServicePipelineTest.afterOcrItPublishesSummaryMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
+    <configuration name="DocumentControllerUploadTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.documents.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrServicePipelineTest" />
-      <option name="METHOD_NAME" value="afterOcrItPublishesSummaryMessage" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OcrTextCleanerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.genai.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker.genai" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.genai.OcrTextCleanerTest" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.documents" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.documents.DocumentControllerUploadTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OcrWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ocr-worker" />
+    <configuration name="DocumentMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.paperlesslab.paperless.worker.*" />
+          <option name="PATTERN" value="com.paperlesslab.paperless.mapper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.worker" />
-      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.worker.OcrWorkerApplicationTests" />
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.mapper.DocumentMapperTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexWorkerApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="index-worker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.paperlesslab.paperless.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.paperlesslab.paperless" />
+      <option name="MAIN_CLASS_NAME" value="com.paperlesslab.paperless.IndexWorkerApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexWorkerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="index-worker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.indexworker.IndexWorkerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexWorkerApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="index-worker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.IndexWorkerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndexWorkerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="index-worker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.indexworker.IndexWorkerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,6 +276,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OcrWorkerApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ocr-worker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.paperless.worker.OcrWorkerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OcrWorkerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ocr-worker" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="paperless.OcrWorkerApplication" />
@@ -203,9 +290,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PaperlessApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Paperless" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.paperless.PaperlessApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PaperlessApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Paperless" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.PaperlessApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Paperless" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -218,19 +322,19 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.OcrWorkerApplicationTests" />
-        <item itemvalue="JUnit.OcrServicePipelineTest.afterOcrItPublishesSummaryMessage" />
-        <item itemvalue="JUnit.OcrTextCleanerTest" />
-        <item itemvalue="JUnit.GenAiResultListenerTest" />
-        <item itemvalue="JUnit.GeminiClientTest" />
+        <item itemvalue="JUnit.IndexWorkerApplicationTests" />
+        <item itemvalue="JUnit.DocumentMapperTest" />
+        <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="JUnit.DocumentControllerUploadTest" />
+        <item itemvalue="JUnit.DocumentControllerTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
       </set>
     </attachedChunks>
   </component>
@@ -248,44 +352,125 @@
       <workItem from="1766450111234" duration="76000" />
       <workItem from="1766450204795" duration="1382000" />
       <workItem from="1766677297337" duration="4568000" />
+      <workItem from="1768087231297" duration="470000" />
+      <workItem from="1768087963245" duration="3047000" />
+      <workItem from="1768091083322" duration="20000" />
+      <workItem from="1768091184627" duration="14779000" />
+      <workItem from="1768160150576" duration="6500000" />
     </task>
+    <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
+      <option name="closed" value="true" />
+      <created>1768100370542</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768100370542</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch">
+      <option name="closed" value="true" />
+      <created>1768105364712</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768105364712</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency">
+      <option name="closed" value="true" />
+      <created>1768106517781</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768106517781</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ui added and updated but it doesnt work">
+      <option name="closed" value="true" />
+      <created>1768108981893</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768108981893</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed the problem: docker compose elastic search was not mappig right&#10;updated the DocumentSearchService">
+      <option name="closed" value="true" />
+      <created>1768109915533</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1768109915534</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated clean method should delete files in db too">
+      <option name="closed" value="true" />
+      <created>1768162528884</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768162528884</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added in workflow that index-worker">
+      <option name="closed" value="true" />
+      <created>1768162718071</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1768162718071</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this">
+      <option name="closed" value="true" />
+      <created>1768165521735</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1768165521735</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="WfRunsListSearchHistory"><![CDATA[{
-  "history": [
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
+    <MESSAGE value="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch" />
+    <MESSAGE value="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency" />
+    <MESSAGE value="ui added and updated but it doesnt work" />
+    <MESSAGE value="fixed the problem: docker compose elastic search was not mappig right&#10;updated the DocumentSearchService" />
+    <MESSAGE value="updated clean method should delete files in db too" />
+    <MESSAGE value="added in workflow that index-worker" />
+    <MESSAGE value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
+    <option name="LAST_COMMIT_MESSAGE" value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
+  </component>
+  <component name="WfRunsListSearchHistory">{
+  &quot;history&quot;: [
     {
-      "branch": "SP5-1",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;SP5-1&quot;,
+      &quot;currentBranchFilter&quot;: true
     },
     {
-      "branch": "SP5-1",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;SP5-1&quot;,
+      &quot;currentBranchFilter&quot;: true
     },
     {
-      "branch": "SP5-1",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;SP5-1&quot;,
+      &quot;currentBranchFilter&quot;: true
     },
     {
-      "branch": "main",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;main&quot;,
+      &quot;currentBranchFilter&quot;: true
     },
     {
-      "branch": "SP5-2",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;SP5-2&quot;,
+      &quot;currentBranchFilter&quot;: true
     },
     {
-      "branch": "SP5-final",
-      "currentBranchFilter": true
+      &quot;branch&quot;: &quot;SP5-final&quot;,
+      &quot;currentBranchFilter&quot;: true
     }
   ],
-  "lastFilter": {
-    "branch": "SP5-final",
-    "currentBranchFilter": true
+  &quot;lastFilter&quot;: {
+    &quot;branch&quot;: &quot;SP5-final&quot;,
+    &quot;currentBranchFilter&quot;: true
   }
-}]]></component>
+}</component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />

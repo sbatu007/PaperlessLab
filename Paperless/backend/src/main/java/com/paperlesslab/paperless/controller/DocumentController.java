@@ -27,6 +27,8 @@ public class DocumentController {
     private final DocumentService documentService;
     private final Path uploadDir = Paths.get("uploads");
     private final FileStorageService fileStorageService;
+    record SetLabelsRequest(List<Long> labelIds) {}
+
 
     public DocumentController(DocumentService documentService, FileStorageService fileStorageService) throws IOException {
         this.documentService = documentService;
@@ -148,4 +150,11 @@ public class DocumentController {
     ResponseEntity<Map<String,String>> tooLarge(Exception ex) {
         return ResponseEntity.status(413).body(Map.of("error", "File too large"));
     }
+
+    @PutMapping("/{id}/labels")
+    public ResponseEntity<DocumentDto> setLabels(@PathVariable Long id, @RequestBody SetLabelsRequest body) {
+        var updated = documentService.setLabels(id, body.labelIds());
+        return ResponseEntity.ok(DocumentMapper.toDto(updated));
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.paperlesslab.paperless.worker.ocr;
 
 import com.paperlesslab.paperless.rabbitmq.DocumentUploadMessage;
+import com.paperlesslab.paperless.rabbitmq.IndexMessage;
+import com.paperlesslab.paperless.worker.rabbitmq.IndexProducer;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import org.slf4j.Logger;
@@ -25,17 +27,20 @@ public class OcrService {
     private final OcrEngine ocrEngine;
     private final GeminiClient geminiClient;
     private final ResultProducer resultProducer;
+    private final IndexProducer indexProducer;
 
     public OcrService(MinioClient minioClient,
                       @Value("${app.minio.bucket}") String bucket,
                       OcrEngine ocrEngine,
                       GeminiClient geminiClient,
-                      ResultProducer resultProducer) {
+                      ResultProducer resultProducer,
+                      IndexProducer indexProducer) {
         this.minioClient = minioClient;
         this.bucket = bucket;
         this.ocrEngine = ocrEngine;
         this.geminiClient = geminiClient;
         this.resultProducer = resultProducer;
+        this.indexProducer = indexProducer;
     }
 
     public void process(DocumentUploadMessage message) {
@@ -75,6 +80,16 @@ public class OcrService {
                         result
                 ));
                 log.info("Published GenAiResultMessage for documentId={}",
+                        message.documentId());
+
+                indexProducer.send(new IndexMessage(
+                        message.documentId(),
+                        message.filename(),
+                        text,
+                        result
+                ));
+
+                log.info("Published GenAiResultMessage + IndexMessage for documentId={}",
                         message.documentId());
 
                 Files.deleteIfExists(tempFile);
