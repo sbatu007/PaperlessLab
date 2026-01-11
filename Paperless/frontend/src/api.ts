@@ -58,3 +58,14 @@ export async function updateDocument(id: number, description: string): Promise<D
     });
     return handle<DocumentDto>(res);
 }
+
+export type SearchHitDto = {
+    documentId: number;
+    filename: string;
+    score: number;
+};
+
+export async function searchDocuments(q: string): Promise<SearchHitDto[]> {
+    const res = await fetch(`${base}/documents/search?q=${encodeURIComponent(q)}`, { method: "GET" });
+    return handle<SearchHitDto[]>(res);
+}

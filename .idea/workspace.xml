@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/SearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/search/IndexedDocumentView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/DocumentSearchService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/service/DocumentSearchServiceTest.java" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +335,7 @@
       <workItem from="1768087231297" duration="470000" />
       <workItem from="1768087963245" duration="3047000" />
       <workItem from="1768091083322" duration="20000" />
-      <workItem from="1768091184627" duration="11170000" />
+      <workItem from="1768091184627" duration="13815000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -357,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768105364712</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency">
+      <option name="closed" value="true" />
+      <created>1768106517781</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768106517781</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +370,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added" />
     <MESSAGE value="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(index-worker): add Elasticsearch indexing with GenAI results&#10;&#10;- Extend IndexMessage with `result` field for AI summaries&#10;- Implement Elasticsearch integration (DocumentIndex entity, repository, service)&#10;- Add IndexMessageListener to consume from RabbitMQ INDEX_QUEUE&#10;- Publish IndexMessage after GenAI processing completes&#10;- Configure docker-compose with index-worker and Elasticsearch&#10;- Add comprehensive unit tests with Mockito mocks&#10;&#10;Completes document pipeline: GenAI → Backend → Index Worker → Elasticsearch" />
+    <MESSAGE value="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Elasticsearch persistence and fix configurations&#10;&#10;- Add es_data volume for persistent Elasticsearch storage&#10;- Fix RabbitMQ Management UI port mapping (9093 → 15672)&#10;- Correct Spring Elasticsearch property (ELASTICSEARCH_URIS → SPRING_ELASTICSEARCH_URIS)&#10;- Expose rest-api port 8081 for external access&#10;- Reorganize service order (infrastructure → workers → api → ui)&#10;- Improve formatting and consistency" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [
