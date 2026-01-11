@@ -124,6 +124,7 @@ services:
       MINIO_ACCESS_KEY: paperless
       MINIO_SECRET_KEY: paperlesssecret
       MINIO_BUCKET: documents
+      ELASTICSEARCH_URIS: http://elasticsearch:9200
     depends_on:
       db:
         condition: service_healthy
