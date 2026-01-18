@@ -58,7 +58,11 @@ export default function Detail() {
     };
 
     useEffect(() => {
-        void loadLabels();
+        const onFocus = () => {
+            void loadLabels();
+        };
+        window.addEventListener("focus", onFocus);
+        return () => window.removeEventListener("focus", onFocus);
     }, []);
 
     useEffect(() => {
@@ -104,6 +108,7 @@ export default function Detail() {
         };
 
         void (async () => {
+            await loadLabels();
             await loadDocument();
             if (!cancelled) pollInterval = window.setInterval(tick, 5000);
         })();

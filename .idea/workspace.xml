@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="workspace">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/maven-build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven-build.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="fixed UI view it is now cleaner">
+      <change afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Labels.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentServiceUpdateDescriptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/documents/DocumentServiceUpdateDescriptionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/LabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/LabelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/LabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/LabelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/index-worker/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +318,7 @@
       <workItem from="1768091184627" duration="14779000" />
       <workItem from="1768160150576" duration="6500000" />
       <workItem from="1768297639502" duration="9283000" />
-      <workItem from="1768773261644" duration="1046000" />
+      <workItem from="1768773261644" duration="2462000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -384,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768165521735</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed UI view it is now cleaner">
+      <option name="closed" value="true" />
+      <created>1768774552370</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1768774552370</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +425,8 @@
     <MESSAGE value="updated clean method should delete files in db too" />
     <MESSAGE value="added in workflow that index-worker" />
     <MESSAGE value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
-    <option name="LAST_COMMIT_MESSAGE" value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
+    <MESSAGE value="fixed UI view it is now cleaner" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed UI view it is now cleaner" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [

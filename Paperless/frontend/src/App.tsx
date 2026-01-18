@@ -2,6 +2,7 @@ import './App.css'
 import Dashboard from './pages/Dashboard';
 import Detail from './pages/Detail';
 import Upload from './pages/Upload';
+import Labels from "./pages/Labels";
 
 import {BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -46,6 +47,7 @@ export default function App() {
                         <Link to="/">Dashboard</Link>
                         <Link to="/upload">Upload</Link>
                         <Link to="/welcome">Home</Link>
+                        <Link to="/labels">Labels</Link>
                     </nav>
                 </div>
             </header>
@@ -57,6 +59,7 @@ export default function App() {
                     <Route path="/upload" element={<Upload />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/welcome" element={<Home />} />
+                    <Route path="/labels" element={<Labels />} />
                 </Routes>
             </main>
         </BrowserRouter>
