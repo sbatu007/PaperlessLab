@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="Fix batch-worker compose context and bind mounts&#10;Add batch worker scheduled processing with perf logging and archiving">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="Fix batch-worker compose context and bind mounts&#10;Add batch worker scheduled processing with perf logging and archiving" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +123,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Spring Boot.IndexWorkerApplication (2).executor": "Run",
     "TestNG.<default>.executor": "Run",
-    "git-widget-placeholder": "SP7",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/janse/IdeaProjects/SWEN3",
     "node.js.detected.package.eslint": "true",
@@ -295,11 +292,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.java in ocr-worker" />
-        <item itemvalue="JUnit.All in index-worker" />
-        <item itemvalue="JUnit.paperless in Paperless" />
         <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="JUnit.paperless in Paperless" />
+        <item itemvalue="JUnit.java in ocr-worker" />
         <item itemvalue="JUnit.IndexWorkerApplicationTests" />
+        <item itemvalue="JUnit.All in index-worker" />
       </list>
     </recent_temporary>
   </component>

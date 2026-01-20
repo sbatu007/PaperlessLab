@@ -10,6 +10,8 @@ Sprint 3 implements the first fully integrated version of the Document Managemen
 
 This README documents all critical architectural aspects, message flow, runtime instructions, validation, error handling, testing strategy, and design decisions required for the Sprint 3 mid-term code review.
 
+> **Note:** This README reflects the final state of the project after completing Sprint 7, including batch processing, Elasticsearch integration, and full end-to-end testing.
+
 ---
 
 # 1. Project Description
@@ -40,7 +42,7 @@ The system consists of five services, orchestrated via Docker Compose.
 
 ## 1. paperless-rest — Spring Boot Backend
 - Exposes REST endpoints under `/documents`
-- Stores document metadata in PostgreSQL
+- Stores document metadata in PostgreSQL (source of truth for all metadata)
 - Handles JSON and multipart uploads
 - Publishes `DocumentUploadMessage` events to RabbitMQ
 - Provides DTO mapping, validation, global exception handling, and logging
@@ -52,7 +54,7 @@ The system consists of five services, orchestrated via Docker Compose.
 - Runs in its own container
 
 ## 3. paperless-db — PostgreSQL
-- Stores document metadata
+- Stores document metadata (source of truth)
 - Accessed through Spring Data JPA
 
 ## 4. rabbitmq — Message Broker
@@ -68,11 +70,13 @@ The system consists of five services, orchestrated via Docker Compose.
 ### Responsibilities: OCR Worker vs Index Worker
 - OCR Worker: consumes upload events, performs OCR on stored files, and emits enriched content (text, metadata).
 - Index Worker: consumes OCR results and indexes filename, description, and OCR text into Elasticsearch for search.
+- Indexing is triggered after OCR completion and after metadata updates (e.g., description changes).
 
 ### Elasticsearch Indexing and Search Flow
 - Backend publishes `DocumentUploadMessage` → OCR Worker extracts text → Index Worker indexes into Elasticsearch.
 - Indexed fields: `id`, `filename`, `description`, `ocrText`.
 - Search queries use Elasticsearch scoring to return ranked results.
+- Elasticsearch is used only for search; PostgreSQL remains the source of truth for persistence.
 
 ### MinIO File Lifecycle
 - Uploads are stored in MinIO (S3-compatible). Metadata remains in PostgreSQL.
@@ -375,6 +379,7 @@ cd batch-worker
 1. Place XML files in `batch-worker/input`.
 2. Worker polls, parses, and persists.
 3. Success → file moves to `batch-worker/archive`; failure → logged and file stays.
+4. On failure, the file remains in the input directory and will be retried on the next scheduled poll.
 
 Health (container internal): `http://localhost:8080/actuator/health`.
 
