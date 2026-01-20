@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="add failsafe + testcontainers + awaitility for integration tests">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/ressources/application-it.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="add application-it profile for integration tests">
+      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/integration/DocumentStandardFlowIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/ressources/application-it.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/ressources/application-it.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +26,9 @@
         <option value="Record" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Dockerfile" />
         <option value="Python Script" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -324,7 +325,7 @@
       <workItem from="1768773261644" duration="5079000" />
       <workItem from="1768909318055" duration="8366000" />
       <workItem from="1768936636573" duration="116000" />
-      <workItem from="1768936766479" duration="680000" />
+      <workItem from="1768936766479" duration="2365000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -422,7 +423,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768936357661</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add application-it profile for integration tests">
+      <option name="closed" value="true" />
+      <created>1768937497704</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1768937497704</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,7 +468,8 @@
     <MESSAGE value="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend" />
     <MESSAGE value="fixed small designing styles" />
     <MESSAGE value="add failsafe + testcontainers + awaitility for integration tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="add failsafe + testcontainers + awaitility for integration tests" />
+    <MESSAGE value="add application-it profile for integration tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add application-it profile for integration tests" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [
