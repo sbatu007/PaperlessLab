@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/Paperless/index-worker/index-worker/pom.xml" />
         <option value="$PROJECT_DIR$/Paperless/index-worker/pom.xml" />
         <option value="$PROJECT_DIR$/Paperless/backend/pom.xml" />
+        <option value="$PROJECT_DIR$/Paperless/batch-worker/pom.xml" />
       </list>
     </option>
   </component>
