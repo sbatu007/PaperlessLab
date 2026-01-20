@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SWEN3.iml" filepath="$PROJECT_DIR$/.idea/SWEN3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Paperless/index-worker/index-worker/index-worker.iml" filepath="$PROJECT_DIR$/Paperless/index-worker/index-worker/index-worker.iml" />
     </modules>
   </component>
 </project>

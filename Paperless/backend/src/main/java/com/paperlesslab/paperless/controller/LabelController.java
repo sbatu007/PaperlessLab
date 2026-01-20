@@ -42,4 +42,11 @@ public class LabelController {
         labelService.delete(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}")
+    public LabelDto rename(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        String name = body.get("name");
+        Label updated = labelService.rename(id, name);
+        return new LabelDto(updated.getId(), updated.getName());
+    }
+
 }

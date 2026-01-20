@@ -2,12 +2,35 @@ import './App.css'
 import Dashboard from './pages/Dashboard';
 import Detail from './pages/Detail';
 import Upload from './pages/Upload';
+import Labels from "./pages/Labels";
 
 import {BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-function Home(){
-    return <p>Paperless App</p>;
+function Home() {
+    return (
+        <section className="panel">
+            <div className="panel-header">
+                <h2>Home</h2>
+            </div>
+
+            <div className="panel-body">
+                <h1>Willkommen bei Paperless</h1>
+                <p className="muted">
+                    Lade Dokumente hoch, verwalte Metadaten & Labels und finde Inhalte per Volltextsuche.
+                </p>
+
+                <div className="actions" style={{ borderTop: "none", paddingTop: 0 }}>
+                    <div className="actions-hint">
+            <span className="hint-pill">
+              Tipp: Starte mit &nbsp;<b>Upload</b>&nbsp; oder öffne das &nbsp;<b>Dashboard</b>.
+            </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
+
 
 
 export default function App() {
@@ -43,9 +66,10 @@ export default function App() {
                 <div className="header-inner">
                     <h1>Paperless</h1>
                     <nav className="nav-links">
+                        <Link to="/welcome">Home</Link>
                         <Link to="/">Dashboard</Link>
                         <Link to="/upload">Upload</Link>
-                        <Link to="/welcome">Home</Link>
+                        <Link to="/labels">Labels</Link>
                     </nav>
                 </div>
             </header>
@@ -53,10 +77,11 @@ export default function App() {
             {/* ======= SEITENINHALT ======= */}
             <main>
                 <Routes>
+                    <Route path="/welcome" element={<Home />} />
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/upload" element={<Upload />} />
                     <Route path="/detail/:id" element={<Detail />} />
-                    <Route path="/welcome" element={<Home />} />
+                    <Route path="/labels" element={<Labels />} />
                 </Routes>
             </main>
         </BrowserRouter>

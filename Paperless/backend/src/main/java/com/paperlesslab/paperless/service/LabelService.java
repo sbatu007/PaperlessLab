@@ -28,10 +28,33 @@ public class LabelService {
         return labelRepository.findByNameIgnoreCase(n)
                 .orElseGet(() -> labelRepository.save(new Label(n)));
     }
+    public Label rename(Long id, String name) {
+        Label l = labelRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Label %d not found".formatted(id)));
+
+        String n = name == null ? "" : name.trim();
+        if (n.isBlank()) throw new IllegalArgumentException("Label name is empty");
+
+        // wenn es ein anderes Label mit dem Namen gibt -> dieses verwenden/ablehnen (deine Wahl)
+        labelRepository.findByNameIgnoreCase(n).ifPresent(existing -> {
+            if (!existing.getId().equals(id)) {
+                throw new IllegalArgumentException("Label name already exists");
+            }
+        });
+
+        l.setName(n);
+        return l;
+    }
 
     public void delete(Long id) {
         Label l = labelRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Label %d not found".formatted(id)));
+
+        // wichtig: Beziehung lösen (Join-Table), sonst FK-Probleme möglich
+        l.getDocuments().forEach(d -> d.getLabels().remove(l));
+        l.getDocuments().clear();
+
         labelRepository.delete(l);
     }
+
 }

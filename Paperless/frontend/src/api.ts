@@ -13,6 +13,7 @@ export type DocumentDto = {
 };
 
 
+
 const base = "/api";
 
 async function handle<T>(res: Response): Promise<T> {
@@ -76,8 +77,21 @@ export async function searchDocuments(q: string): Promise<SearchHitDto[]> {
     return handle<SearchHitDto[]>(res);
 }
 export async function listLabels(): Promise<LabelDto[]> {
-    const res = await fetch(`${base}/labels`, { method: "GET" });
+    const res = await fetch(`${base}/labels`, {
+        method: "GET",
+        cache: "no-store",
+        headers: { "Accept": "application/json" },
+    });
     return handle<LabelDto[]>(res);
+}
+
+export async function updateLabel(id: number, name: string): Promise<LabelDto> {
+    const res = await fetch(`${base}/labels/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+    });
+    return handle<LabelDto>(res);
 }
 
 export async function createLabel(name: string): Promise<LabelDto> {

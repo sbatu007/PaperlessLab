@@ -43,13 +43,11 @@ export default function Detail() {
             const data = await getDocument(Number(id));
             setDoc(data);
 
-            // init description once
             if (!didInitDesc.current) {
                 setDesc(data.description ?? "");
                 didInitDesc.current = true;
             }
 
-            // init label selection once
             if (!didInitLabels.current) {
                 setSelectedLabelIds((data.labels ?? []).map((l) => l.id));
                 didInitLabels.current = true;
@@ -59,12 +57,14 @@ export default function Detail() {
         }
     };
 
-    // load label catalog once
     useEffect(() => {
-        void loadLabels();
+        const onFocus = () => {
+            void loadLabels();
+        };
+        window.addEventListener("focus", onFocus);
+        return () => window.removeEventListener("focus", onFocus);
     }, []);
 
-    // load document + poll for GenAI result
     useEffect(() => {
         if (!id) return;
 
@@ -88,19 +88,16 @@ export default function Detail() {
 
                 setDoc(data);
 
-                // do NOT overwrite label selection while user is editing
                 if (!userTouchedLabels.current) {
                     setSelectedLabelIds((data.labels ?? []).map((l) => l.id));
                 }
 
-                // stop polling once result exists
                 if (data.result && data.result.trim().length > 0) {
                     if (pollInterval) window.clearInterval(pollInterval);
                     pollInterval = null;
                     return;
                 }
 
-                // stop polling after timeout
                 if (Date.now() - start > timeoutMs) {
                     if (pollInterval) window.clearInterval(pollInterval);
                     pollInterval = null;
@@ -111,6 +108,7 @@ export default function Detail() {
         };
 
         void (async () => {
+            await loadLabels();
             await loadDocument();
             if (!cancelled) pollInterval = window.setInterval(tick, 5000);
         })();
@@ -121,7 +119,6 @@ export default function Detail() {
         };
     }, [id]);
 
-    // Derived: selected labels as objects (for chip rendering)
     const selectedLabels: LabelDto[] = selectedLabelIds
         .map((lid) => allLabels.find((l) => l.id === lid))
         .filter(Boolean) as LabelDto[];
@@ -133,14 +130,11 @@ export default function Detail() {
         setSuccess(null);
 
         try {
-            // 1) save description
             await updateDocument(Number(id), desc);
 
-            // 2) save labels
             const updated = await setDocumentLabels(Number(id), selectedLabelIds);
             setDoc(updated);
 
-            // now we're in sync with server again
             userTouchedLabels.current = false;
 
             setSuccess("Änderungen erfolgreich gespeichert!");
@@ -152,24 +146,26 @@ export default function Detail() {
         }
     }
 
-    if (error)
+    if (error) {
         return (
             <div role="alert" className="alert error">
                 Error: {error}
             </div>
         );
+    }
 
-    if (!doc)
+    if (!doc) {
         return (
             <section className="panel">
                 <div className="panel-body">Loading…</div>
             </section>
         );
+    }
 
     return (
         <section className="panel">
             <div className="panel-header">
-                <h2>Document</h2>
+                <h2>Document-Detail</h2>
             </div>
 
             <div className="panel-body">
@@ -181,95 +177,92 @@ export default function Detail() {
                     <div className="filename-box">{doc.filename}</div>
                 </div>
 
-                <div className="field">
-                    <label className="label">Beschreibung:</label>
-                    <input
-                        value={desc}
-                        onChange={(e) => setDesc(e.target.value)}
-                        placeholder="Beschreibung eingeben"
-                        className="input"
-                    />
-                </div>
-
-                <div className="field">
-                    <label className="label">Labels:</label>
-
-                    {/* centered box */}
-                    <div className="labels-box">
-                        <div className="labels-chips">
-                            {selectedLabels.map((l) => (
-                                <span key={l.id} className="chip">
-                                  <span className="chip-text">{l.name}</span>
-                                  <button
-                                      type="button"
-                                      className="chip-x"
-                                      title="Vom Dokument entfernen"
-                                      onClick={() => {
-                                          userTouchedLabels.current = true;
-                                          setSelectedLabelIds((prev) => prev.filter((x) => x !== l.id));
-                                      }}
-                                  >
-                                    ×
-                                  </button>
-                                </span>
-                                                        ))}
-
-                                                        {selectedLabels.length === 0 && (
-                                                            <span className="muted">(keine Labels)</span>
-                                                        )}
-                                                    </div>
-
-                        <div className="labels-add-row">
-                            <select
-                                className="input"
-                                defaultValue=""
-                                onChange={(e) => {
-                                    const v = e.target.value;
-                                    if (!v) return;
-
-                                    const labelId = Number(v);
-                                    if (Number.isNaN(labelId)) return;
-
-                                    userTouchedLabels.current = true;
-                                    setSelectedLabelIds((prev) =>
-                                        prev.includes(labelId) ? prev : [...prev, labelId]
-                                    );
-
-                                    // reset select to placeholder
-                                    e.currentTarget.value = "";
-                                }}
-                            >
-                                <option value="">Vorhandenes Label hinzufügen…</option>
-                                {allLabels
-                                    .slice()
-                                    .sort((a, b) => a.name.localeCompare(b.name))
-                                    .filter((l) => !selectedLabelIds.includes(l.id))
-                                    .map((l) => (
-                                        <option key={l.id} value={l.id}>
-                                            {l.name}
-                                        </option>
-                                    ))}
-                            </select>
+                <div className="detail-grid">
+                    <div className="detail-left">
+                        <div className="card">
+                            <div className="card-title">Beschreibung</div>
+                            <div className="field">
+                <textarea
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    placeholder="Beschreibung eingeben"
+                    className="input"
+                    rows={2}
+                />
+                            </div>
                         </div>
 
-                        <div className="labels-add-row">
-                            <input
-                                value={newLabelName}
-                                onChange={(e) => setNewLabelName(e.target.value)}
-                                placeholder="Neues Label (z.B. Rechnung)"
-                                className="input"
-                            />
-                            <button
-                                className="btn"
-                                type="button"
-                                disabled={busy}
-                                onClick={async () => {
-                                    const n = newLabelName.trim();
-                                    if (!n) return;
+                        <div className="card">
+                            <div className="card-title">Labels</div>
 
-                                    try {
+                            <div className="labels-chips left">
+                                {selectedLabels.map((l) => (
+                                    <span key={l.id} className="chip">
+                    <span className="chip-text">{l.name}</span>
+                    <button
+                        type="button"
+                        className="chip-x"
+                        title="Vom Dokument entfernen"
+                        onClick={() => {
+                            userTouchedLabels.current = true;
+                            setSelectedLabelIds((prev) => prev.filter((x) => x !== l.id));
+                        }}
+                    >
+                      ×
+                    </button>
+                  </span>
+                                ))}
+                                {selectedLabels.length === 0 && (
+                                    <span className="muted">(keine Labels)</span>
+                                )}
+                            </div>
+
+                            <div className="labels-add-row">
+                                <select
+                                    className="input"
+                                    defaultValue=""
+                                    onChange={(e) => {
+                                        const v = e.target.value;
+                                        if (!v) return;
+                                        const labelId = Number(v);
+                                        if (Number.isNaN(labelId)) return;
+
+                                        userTouchedLabels.current = true;
+                                        setSelectedLabelIds((prev) =>
+                                            prev.includes(labelId) ? prev : [...prev, labelId]
+                                        );
+                                        e.currentTarget.value = "";
+                                    }}
+                                >
+                                    <option value="">Vorhandenes Label hinzufügen…</option>
+                                    {allLabels
+                                        .slice()
+                                        .sort((a, b) => a.name.localeCompare(b.name))
+                                        .filter((l) => !selectedLabelIds.includes(l.id))
+                                        .map((l) => (
+                                            <option key={l.id} value={l.id}>
+                                                {l.name}
+                                            </option>
+                                        ))}
+                                </select>
+                            </div>
+
+                            <div className="labels-add-row two">
+                                <input
+                                    value={newLabelName}
+                                    onChange={(e) => setNewLabelName(e.target.value)}
+                                    placeholder="Neues Label (z.B. Rechnung)"
+                                    className="input"
+                                />
+                                <button
+                                    className="btn"
+                                    type="button"
+                                    disabled={busy}
+                                    onClick={async () => {
+                                        const n = newLabelName.trim();
+                                        if (!n) return;
+
                                         const created = await createLabel(n);
-
                                         setAllLabels((prev) => {
                                             const next = [...prev, created];
                                             next.sort((a, b) => a.name.localeCompare(b.name));
@@ -280,45 +273,49 @@ export default function Detail() {
                                         setSelectedLabelIds((prev) =>
                                             prev.includes(created.id) ? prev : [...prev, created.id]
                                         );
-
                                         setNewLabelName("");
-                                    } catch (e) {
-                                        alert((e as Error).message);
-                                    }
-                                }}
-                            >
-                                + Add
-                            </button>
+                                    }}
+                                >
+                                    + Add
+                                </button>
+                            </div>
                         </div>
+                    </div>
 
-                        <div className="muted" style={{ marginTop: 8 }}>
-                            Änderungen werden mit <b>Save</b> gespeichert.
+                    <div className="detail-right">
+                        <div className="card">
+                            <div className="card-title">Zusammenfassung (GenAI)</div>
+                            <textarea
+                                className="input mono"
+                                readOnly
+                                value={
+                                    doc?.result && doc.result.trim().length > 0
+                                        ? doc.result
+                                        : "(noch keine Zusammenfassung vorhanden – OCR/GenAI läuft …)"
+                                }
+                            />
                         </div>
                     </div>
                 </div>
 
-                <div className="field">
-                    <label className="label">Zusammenfassung (GenAI):</label>
-                    <textarea
-                        className="input"
-                        readOnly
-                        value={
-                            doc?.result && doc.result.trim().length > 0
-                                ? doc.result
-                                : "(noch keine Zusammenfassung vorhanden – OCR/GenAI läuft …)"
-                        }
-                        rows={10}
-                        style={{ resize: "vertical", whiteSpace: "pre-wrap" }}
-                    />
-                </div>
-
                 <div className="actions">
-                    <button className="btn primary" onClick={onSave} disabled={busy}>
-                        {busy ? "Saving…" : "Save"}
-                    </button>
-                    <Link className="btn" to="/">
-                        Back
-                    </Link>
+                    <div className="actions-hint" aria-live="polite">
+                        <span className="hint-pill">
+                          Änderungen werden erst mit&nbsp;<b>Save</b>&nbsp;übernommen.
+                        </span>
+
+
+                        {success && <span className="hint-success">Gespeichert</span>}
+                    </div>
+
+                    <div className="actions-buttons">
+                        <Link className="btn" to="/">
+                            Back
+                        </Link>
+                        <button className="btn primary" onClick={onSave} disabled={busy}>
+                            {busy ? "Saving…" : "Save"}
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
