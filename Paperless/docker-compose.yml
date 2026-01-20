@@ -156,7 +156,7 @@ services:
 
   batch-worker:
     build:
-      context: ./Paperless/batch-worker
+      context: ./batch-worker
       dockerfile: Dockerfile
     container_name: paperless-batch-worker
     restart: unless-stopped
@@ -172,13 +172,15 @@ services:
       BATCH_FIXED_DELAY_MS: 60000
       BATCH_INITIAL_DELAY_MS: 5000
     volumes:
-      - ./Paperless/batch-worker/input:/app/input
-      - ./Paperless/batch-worker/archive:/app/archive
+      - ./batch-worker/input:/app/input
+      - ./batch-worker/archive:/app/archive
+    networks: [ paperless-net ]
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 5
+
 
 networks:
   paperless-net:

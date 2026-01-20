@@ -34,6 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Sprint 7 - Unique feature integration test:
  * Upload document -> create labels -> tag document -> remove labels -> delete label
  * REST level, real PostgreSQL via Testcontainers, infra mocked.
+ *
+ * Includes per-step performance logging.
  */
 @Testcontainers
 @SpringBootTest
@@ -44,7 +46,8 @@ class LabelUseCaseIT {
     private static final Logger log = LoggerFactory.getLogger(LabelUseCaseIT.class);
 
     @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
+    @SuppressWarnings("resource") // IntelliJ warns about try-with-resources; fine for @Container lifecycle
+    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
             .withDatabaseName("paperless")
             .withUsername("paperless_user")
             .withPassword("secret");
@@ -57,18 +60,18 @@ class LabelUseCaseIT {
         r.add("spring.jpa.hibernate.ddl-auto", () -> "update");
     }
 
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
 
-    // Same safety trick as your DocumentStandardFlowIT
+    // Only here to override Spring's internal rabbit listener registry bean (prevents context startup issues)
     @MockBean(name = "org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry")
-    RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry;
+    private RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry;
 
-    // Infra mocks: keep IT scope REST + DB
-    @MockBean FileStorageService fileStorageService;
-    @MockBean RabbitMqProducer rabbitMqProducer;
-    @MockBean SearchIndexService searchIndexService;
-    @MockBean DocumentSearchService documentSearchService;
+    // Infra mocks: keep IT scope REST + DB only
+    @MockBean private FileStorageService fileStorageService;
+    @MockBean private RabbitMqProducer rabbitMqProducer;
+    @MockBean private SearchIndexService searchIndexService;
+    @MockBean private DocumentSearchService documentSearchService;
 
     @Test
     void labels_flow_upload_tag_remove_deleteLabel() throws Exception {
@@ -80,7 +83,9 @@ class LabelUseCaseIT {
         // ---------------------------------------------------------------------
         // STEP 1: upload document first (required order)
         // ---------------------------------------------------------------------
+        log.info("[STEP 1] upload document");
         long s1 = System.currentTimeMillis();
+
         MockMultipartFile pdf = new MockMultipartFile(
                 "file", "LabelDoc.pdf", "application/pdf", "%PDF-1.4 fake".getBytes()
         );
@@ -92,7 +97,9 @@ class LabelUseCaseIT {
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.labels").isArray())
                 .andExpect(jsonPath("$.labels", hasSize(0)))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         long docId = objectMapper.readTree(uploadJson).get("id").asLong();
         log.info("[PERF] upload took {} ms", (System.currentTimeMillis() - s1));
@@ -100,25 +107,32 @@ class LabelUseCaseIT {
         // ---------------------------------------------------------------------
         // STEP 2: create two labels
         // ---------------------------------------------------------------------
+        log.info("[STEP 2] create labels");
         long s2 = System.currentTimeMillis();
+
         long labelAId = createLabel("Finance");
         long labelBId = createLabel("2026");
+
         log.info("[PERF] create labels took {} ms", (System.currentTimeMillis() - s2));
 
         // ---------------------------------------------------------------------
         // STEP 3: tag document with those labels
         // ---------------------------------------------------------------------
+        log.info("[STEP 3] tag document");
         long s3 = System.currentTimeMillis();
+
         mockMvc.perform(put("/documents/{id}/labels", docId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"labelIds\":[" + labelAId + "," + labelBId + "]}"))
+                        .content("{\"labelIds\":[" + labelAId + " , " + labelBId + "]}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(docId))
                 .andExpect(jsonPath("$.labels").isArray())
                 .andExpect(jsonPath("$.labels", hasSize(2)));
+
         log.info("[PERF] tag document took {} ms", (System.currentTimeMillis() - s3));
 
         // Verify GET returns labels
+        log.info("[STEP 3b] verify tags via GET");
         mockMvc.perform(get("/documents/{id}", docId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.labels", hasSize(2)));
@@ -126,23 +140,29 @@ class LabelUseCaseIT {
         // ---------------------------------------------------------------------
         // STEP 4: remove labels by setting empty list
         // ---------------------------------------------------------------------
+        log.info("[STEP 4] remove labels");
         long s4 = System.currentTimeMillis();
+
         mockMvc.perform(put("/documents/{id}/labels", docId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"labelIds\":[]}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.labels", hasSize(0)));
+
         log.info("[PERF] remove labels took {} ms", (System.currentTimeMillis() - s4));
 
         // ---------------------------------------------------------------------
-        // STEP 5: delete a label (should unlink join table safely in LabelService)
+        // STEP 5: delete a label
         // ---------------------------------------------------------------------
+        log.info("[STEP 5] delete label");
         long s5 = System.currentTimeMillis();
+
         mockMvc.perform(delete("/labels/{id}", labelAId))
                 .andExpect(status().isNoContent());
+
         log.info("[PERF] delete label took {} ms", (System.currentTimeMillis() - s5));
 
-        // Labels list should not contain deleted label anymore
+        // Sanity: labels endpoint still works
         mockMvc.perform(get("/labels"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray());
@@ -157,7 +177,9 @@ class LabelUseCaseIT {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.name").value(name))
-                .andReturn().getResponse().getContentAsString();
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         JsonNode n = objectMapper.readTree(json);
         return n.get("id").asLong();

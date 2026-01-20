@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs">
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/sample/access-2026-01-20.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="batch-worker: add Dockerfile, sample XML, and docker-compose service for batch-worker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/integration/LabelUseCaseIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/integration/LabelUseCaseIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,11 +149,11 @@
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\batch-worker\input" />
+      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\batch-worker\sample" />
       <recent name="$PROJECT_DIR$/Paperless/integration-tests/samples" />
       <recent name="$PROJECT_DIR$/Paperless/integration-tests/tests" />
       <recent name="$PROJECT_DIR$/Paperless/untitled" />
-      <recent name="$PROJECT_DIR$/Paperless" />
-      <recent name="$PROJECT_DIR$/Paperless/integration-tests/untitled" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.paperlesslab.paperless.rabbitmq" />
@@ -474,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768945790355</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="batch-worker: add Dockerfile, sample XML, and docker-compose service for batch-worker">
+      <option name="closed" value="true" />
+      <created>1768946508415</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1768946508415</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +522,8 @@
     <MESSAGE value="add standard REST IT (upload-update-delete)" />
     <MESSAGE value="test(it): add LabelUseCaseIT (upload -&gt; create labels -&gt; tag -&gt; remove -&gt; delete label) with perf logging&#10;DocumentStandardFlowIT alsp added perf logging" />
     <MESSAGE value="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs" />
+    <MESSAGE value="batch-worker: add Dockerfile, sample XML, and docker-compose service for batch-worker" />
+    <option name="LAST_COMMIT_MESSAGE" value="batch-worker: add Dockerfile, sample XML, and docker-compose service for batch-worker" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [

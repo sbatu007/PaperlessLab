@@ -1,0 +1,5 @@
+<accessLogs day="2026-01-20">
+    <access documentId="1" count="3"/>
+    <access documentId="2" count="10"/>
+    <access documentId="2" count="2"/>
+</accessLogs>
