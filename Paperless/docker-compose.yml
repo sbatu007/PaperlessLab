@@ -154,6 +154,32 @@ services:
       - db
     networks: [ paperless-net ]
 
+  batch-worker:
+    build:
+      context: ./Paperless/batch-worker
+      dockerfile: Dockerfile
+    container_name: paperless-batch-worker
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/paperless
+      SPRING_DATASOURCE_USERNAME: paperless_user
+      SPRING_DATASOURCE_PASSWORD: secret
+      BATCH_INPUT_DIR: /app/input
+      BATCH_ARCHIVE_DIR: /app/archive
+      BATCH_FIXED_DELAY_MS: 60000
+      BATCH_INITIAL_DELAY_MS: 5000
+    volumes:
+      - ./Paperless/batch-worker/input:/app/input
+      - ./Paperless/batch-worker/archive:/app/archive
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 networks:
   paperless-net:
     name: paperless-net

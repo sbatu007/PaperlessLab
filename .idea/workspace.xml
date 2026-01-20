@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="test(it): add LabelUseCaseIT (upload -&gt; create labels -&gt; tag -&gt; remove -&gt; delete label) with perf logging&#10;DocumentStandardFlowIT alsp added perf logging">
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/src/main/java/com/paperlesslab/batchworker/entity/DocumentAccessStat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/src/main/java/com/paperlesslab/batchworker/job/AccessLogBatchJob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/src/main/java/com/paperlesslab/batchworker/repo/DocumentAccessStatRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/src/main/java/com/paperlesslab/batchworker/xml/AccessEntryXml.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/src/main/java/com/paperlesslab/batchworker/xml/AccessLogsXml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs">
+      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paperless/batch-worker/sample/access-2026-01-20.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +26,9 @@
         <option value="Record" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Dockerfile" />
         <option value="Python Script" />
         <option value="Class" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -71,6 +66,9 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -460,7 +458,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768944737680</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs">
+      <option name="closed" value="true" />
+      <created>1768945782166</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1768945782166</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs">
+      <option name="closed" value="true" />
+      <created>1768945790355</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1768945790355</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +514,8 @@
     <MESSAGE value="add application-it profile for integration tests" />
     <MESSAGE value="add standard REST IT (upload-update-delete)" />
     <MESSAGE value="test(it): add LabelUseCaseIT (upload -&gt; create labels -&gt; tag -&gt; remove -&gt; delete label) with perf logging&#10;DocumentStandardFlowIT alsp added perf logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="test(it): add LabelUseCaseIT (upload -&gt; create labels -&gt; tag -&gt; remove -&gt; delete label) with perf logging&#10;DocumentStandardFlowIT alsp added perf logging" />
+    <MESSAGE value="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(batch): implement scheduled XML import job with JPA persistence + archiving + perf logs" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [
