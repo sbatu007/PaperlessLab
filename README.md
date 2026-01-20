@@ -27,6 +27,11 @@ The main focus of Sprint 3 – Intermediate is:
 This sprint prepares the system for later sprints:
 OCR (Sprint 4), Generative AI summaries (Sprint 5), Elasticsearch search (Sprint 6), Batch processing (Sprint 7).
 
+## Out of Scope / Non-Goals
+- No authentication or authorization
+- No user management
+- No production hardening (HTTPS, secrets management)
+
 ---
 
 # 2. Architecture (Textual Description)
@@ -60,6 +65,20 @@ The system consists of five services, orchestrated via Docker Compose.
 - Receives `DocumentUploadMessage`
 - Logs message (OCR implementation in next sprint)
 
+### Responsibilities: OCR Worker vs Index Worker
+- OCR Worker: consumes upload events, performs OCR on stored files, and emits enriched content (text, metadata).
+- Index Worker: consumes OCR results and indexes filename, description, and OCR text into Elasticsearch for search.
+
+### Elasticsearch Indexing and Search Flow
+- Backend publishes `DocumentUploadMessage` → OCR Worker extracts text → Index Worker indexes into Elasticsearch.
+- Indexed fields: `id`, `filename`, `description`, `ocrText`.
+- Search queries use Elasticsearch scoring to return ranked results.
+
+### MinIO File Lifecycle
+- Uploads are stored in MinIO (S3-compatible). Metadata remains in PostgreSQL.
+- Backend writes multipart files to MinIO; workers read from MinIO by object key.
+- File stays in MinIO; OCR/Index workers do not delete or mutate the object.
+
 ---
 
 # 3. Message Flow (Upload → RabbitMQ → Worker)
@@ -80,11 +99,20 @@ The system consists of five services, orchestrated via Docker Compose.
 5. Backend publishes message to queue `ocr.document.uploaded`.
 6. Worker receives message asynchronously.
 7. Worker logs the message.
-
+8. Stored file is available in MinIO for OCR and indexing; metadata stays in PostgreSQL.
 
 ---
 
-# 4. How to Run the System (Docker Compose)
+# 4. Environment & Secrets
+- Requires Docker and Docker Compose
+- Java 21 and Node.js 20 for local development
+- Copy `.env.sample` to `.env` and set `GOOGLE_API_KEY`
+- Do not commit `.env` or secrets
+- Frontend uses `.env` variables for API base URL; backend uses Spring `application.yml` plus `.env`
+
+---
+
+# 5. How to Run the System (Docker Compose)
 
 ## Requirements
 - Docker
@@ -139,10 +167,25 @@ This starts:
 - PostgreSQL
 - RabbitMQ
 - OCR worker
+- Index worker
+- MinIO
+- Batch worker
+
+To stop:
+```bash
+docker compose down
+```
+
+Health checks (inside Docker network):
+- Backend: `http://paperless-backend:8081/actuator/health`
+- OCR worker: `http://ocr-worker:8080/actuator/health`
+- Index worker: `http://index-worker:8080/actuator/health`
+- Batch worker: `http://batch-worker:8080/actuator/health`
+- Docker Compose health checks rely on these Actuator endpoints.
 
 ---
 
-# 5. Ports & URLs
+# 6. Ports & URLs
 
 | Service | URL / Port | Description |
 |--------|------------|-------------|
@@ -151,6 +194,9 @@ This starts:
 | PostgreSQL | 5432 | Database |
 | RabbitMQ UI | http://localhost:15672 | Queue Dashboard |
 | OCR Worker | — | Listens to queue only |
+| Batch Worker | — | Runs on internal port 8080 (health) |
+| MinIO UI | http://localhost:9001 | Object storage console |
+| MinIO S3 | http://localhost:9000 | S3-compatible API |
 
 RabbitMQ credentials:
 - **User:** paperless
@@ -158,7 +204,7 @@ RabbitMQ credentials:
 
 ---
 
-# 6. REST API Documentation
+# 7. REST API Documentation
 
 Base path: `/documents`
 
@@ -194,9 +240,25 @@ Description max length = **2000 characters**.
 ## DELETE /documents/{id}
 Deletes document by ID.
 
+## GET /documents/search?query={text}
+Performs full-text search via Elasticsearch on filename, description, and OCR text.  
+Returns ranked results by Elasticsearch score.
+
+Example response:
+```json
+[
+  {
+    "id": 1,
+    "filename": "invoice.pdf",
+    "description": "March invoice",
+    "score": 2.13
+  }
+]
+```
+
 ---
 
-# 7. Validation Rules
+# 8. Validation Rules
 
 Using Jakarta Bean Validation:
 
@@ -207,13 +269,13 @@ Invalid requests produce structured JSON field errors:
 
 ```json
 {
-  "description": "must be at most 2000 characters"
+  "description": "is max 2000 characters"
 }
 ```
 
 ---
 
-# 8. Error Handling (GlobalExceptionHandler)
+# 9. Error Handling (GlobalExceptionHandler)
 
 Global exception handling ensures uniform JSON error responses.
 
@@ -233,7 +295,7 @@ Example:
 
 ---
 
-# 9. Testing Strategy
+# 10. Testing Strategy
 
 Sprint 3 requires automated tests.  
 The project contains a complete test suite:
@@ -256,69 +318,144 @@ Using MockMvc:
 ## Worker Tests
 - Ensures worker can consume queue messages
 
-Run tests:
+## Integration Tests (Backend)
+- Uses Testcontainers for PostgreSQL, RabbitMQ, Elasticsearch
+- Run with Maven Failsafe (`*IT.java` suffix)
+- Requires Docker daemon running
+- Coverage includes end-to-end upload flow with queue consumption and search index verification.
+
+Run all (unit + integration):
 ```bash
-cd backend
+cd Paperless/backend
+./mvnw verify
+```
+
+Unit only:
+```bash
+cd Paperless/backend
 ./mvnw test
+```
+
+Integration only:
+```bash
+cd Paperless/backend
+./mvnw failsafe:integration-test failsafe:verify
 ```
 
 ---
 
-# 10. Design Decisions (Critical Aspects)
+# 11. Batch Processing Guide
+The batch worker imports XML access logs into PostgreSQL on a fixed schedule.
 
-## Loose Coupling
-- REST layer uses DTOs
-- Service layer uses entities
-- Worker is fully decoupled (messaging only)
+## Configuration
+- Input directory: `batch-worker/input` (mounted to `/app/input`)
+- Archive directory: `batch-worker/archive` (mounted to `/app/archive`)
+- Interval: `BATCH_FIXED_DELAY_MS` (default 60000 ms)
+- Initial delay: `BATCH_INITIAL_DELAY_MS` (default 5000 ms)
+- Database: shared Postgres from Docker Compose
 
-## Asynchronous Architecture
-- Upload returns immediately
-- Worker processes in background
+## Run in Docker Compose
+```bash
+docker compose up batch-worker --build
+```
+Starts automatically with `docker compose up --build`.
 
-## Scalability
-- Worker can be horizontally scaled
+## Local Development Run
+```bash
+cd batch-worker
+./mvnw spring-boot:run \
+  -DBATCH_INPUT_DIR=./input \
+  -DBATCH_ARCHIVE_DIR=./archive \
+  -Dspring.datasource.url=jdbc:postgresql://localhost:5432/paperless \
+  -Dspring.datasource.username=paperless_user \
+  -Dspring.datasource.password=secret
+```
 
-## Reliability
-- RabbitMQ stores messages
-- Worker may be offline
+## Processing Steps
+1. Place XML files in `batch-worker/input`.
+2. Worker polls, parses, and persists.
+3. Success → file moves to `batch-worker/archive`; failure → logged and file stays.
 
-## Predictable Error Handling
-- Centralized exception management
-- Clear JSON structures
+Health (container internal): `http://localhost:8080/actuator/health`.
+
+## Data Model and Aggregation Logic
+- Input XML contains access log entries (document ID, timestamp).
+- Worker aggregates access counts per document and per day.
+- Aggregated results are persisted in PostgreSQL (document-day totals).
+- Each processed XML file is archived after successful persistence.
 
 ---
 
-# 11. Project Structure
-
+# 12. Project Structure
 ```bash
-Paperless/
+SWEN3/
 │
-├── backend/                   # Spring Boot REST API
-│   ├── src/main/java
-│   ├── src/test/java
-│   └── Dockerfile
+├── .github/
+│   └── workflows/
+│       └── maven-build.yml        # GitHub Actions CI pipeline (build & test)
 │
-├── ocr-worker/                # Spring Boot RabbitMQ consumer
-│   └── Dockerfile
+├── Paperless/
+│   │
+│   ├── backend/                   # Spring Boot REST backend (paperless-backend)
+│   │   ├── src/main/java
+│   │   ├── src/test/java
+│   │   ├── src/main/resources
+│   │   ├── src/test/resources
+│   │   └── Dockerfile
+│   │
+│   ├── frontend/                  # React web frontend
+│   │   ├── src/
+│   │   ├── public/
+│   │   └── Dockerfile
+│   │
+│   ├── ocr-worker/                # Spring Boot OCR worker service
+│   │   ├── src/main/java
+│   │   ├── src/main/resources
+│   │   └── Dockerfile
+│   │
+│   ├── index-worker/              # Spring Boot Elasticsearch indexing worker
+│   │   ├── src/main/java
+│   │   ├── src/main/resources
+│   │   └── Dockerfile
+│   │
+│   ├── batch-worker/              # Batch processing service (Sprint 7)
+│   │   ├── src/main/java
+│   │   ├── src/main/resources
+│   │   ├── input/                 # XML input directory
+│   │   ├── archive/               # Archived processed XML files
+│   │   └── Dockerfile
+│   │
+│   ├── data/                      # Persistent data volumes (Docker)
+│   │
+│   ├── uploads/                   # Uploaded documents (local volume)
+│   │
+│   ├── .env                       # Local environment configuration (not committed)
+│   ├── .env.sample                # Environment variable template
+│   ├── docker-compose.yml         # Service orchestration
+│   └── .gitignore
 │
-├── frontend/                  # React UI
-│   └── Dockerfile
-│
-├── docker-compose.yml         # Orchestration
-└── README.md                  # This file```
-
----
-
-# 13. Running Tests
-
-```bash
-cd backend
-./mvnw test
+├── README.md                      # Main project documentation
+├── semester-project.pdf           # Assignment specification
+├── semester-project-architecture.png  # Architecture diagram
+├── .gitattributes
+└── .gitignore
 ```
 
 ---
 
-# 12. Authors
-Batuhan Saimler
+# 13. Troubleshooting
+- Docker not running → Testcontainers/integration tests fail.
+- Port conflicts (8081, 5432, 15672, 9000/9001) → stop other services or remap in `docker-compose.yml`.
+- RabbitMQ auth errors → check `.env` user/password match compose.
+- MinIO not reachable → ensure `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` in `.env`.
+
+---
+
+# 14. CI Pipeline
+- GitHub Actions workflow at `.github/workflows/maven-build.yml`
+- Runs Maven build and tests on push/pull requests
+
+---
+
+# 15. Authors
 Jansen Wu
-
