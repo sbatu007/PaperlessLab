@@ -20,7 +20,7 @@ dist/
 
 # Uploads
 uploads/
-data/uploads/
+data/
 
 # OS
 .DS_Store

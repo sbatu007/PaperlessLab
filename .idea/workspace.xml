@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="add application-it profile for integration tests">
-      <change afterPath="$PROJECT_DIR$/Paperless/backend/src/test/java/com/paperlesslab/paperless/integration/DocumentStandardFlowIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/test/ressources/application-it.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/test/ressources/application-it.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/errors/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/errors/GlobalExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +80,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "Docker.Paperless: Compose Deployment.executor": "Run",
     "JUnit.All in index-worker.executor": "Run",
     "JUnit.DocumentControllerTest.executor": "Run",
@@ -262,7 +266,7 @@
       </method>
     </configuration>
     <configuration name="PaperlessApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="Paperless" />
+      <module name="paperless-backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.paperlesslab.paperless.PaperlessApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
