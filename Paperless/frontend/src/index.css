@@ -577,4 +577,18 @@ textarea.mono {
   gap: 10px;
   align-items: center;
 }
+/* ===============================
+   DANGER BUTTON (Delete)
+   =============================== */
+
+.btn.danger {
+  background: var(--danger);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.danger:hover {
+  background: #b91c1c; /* etwas dunkler beim Hover */
+}
+
 

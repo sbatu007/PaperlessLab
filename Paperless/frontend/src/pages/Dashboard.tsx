@@ -68,10 +68,12 @@ export default function Dashboard() {
         <section className="panel">
             <div className="panel-header">
                 <h2>Documents</h2>
-                <Link to="/upload" className="btn small">+ Upload new Document</Link>
             </div>
 
             <div className="panel-body">
+                <Link to="/upload" className="btn small" style={{ marginBottom: 12, display: "inline-block" }}>
+                    + Upload new Document
+                </Link>
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
                     <input
                         value={query}
@@ -143,7 +145,7 @@ export default function Dashboard() {
                                         ))}
                                     </div>                                    <div className="col-actions">
                                         <Link className="btn small" to={`/detail/${d.id}`}>Open</Link>
-                                        <button className="btn small danger" onClick={() => void onDelete(d.id)}>Delete</button>
+                                        <button className="btn danger" onClick={() => void onDelete(d.id)}>Delete</button>
                                     </div>
                                 </li>
                             ))}

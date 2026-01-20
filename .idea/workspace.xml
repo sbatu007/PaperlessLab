@@ -4,29 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="fixed UI view it is now cleaner">
-      <change afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Labels.tsx" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/LabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/controller/LabelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/LabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/src/main/java/com/paperlesslab/paperless/service/LabelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Upload.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/jansenwu/Documents/SWEN3" value="35fagEiJkUxbg4lO2ik5T8xdVaM" />
+    </persistenceIdMap>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dockerfile" />
         <option value="Record" />
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Dockerfile" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -129,8 +134,8 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/jansenwu/Documents/SWEN3/Paperless/frontend/node_modules/typescript/lib&quot;,
@@ -142,11 +147,11 @@
       <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\index-worker\src\test\java\resources" />
-      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless\index-worker\src\main\resources" />
-      <recent name="C:\Users\janse\IdeaProjects\SWEN3\Paperless" />
-      <recent name="C:\Users\janse\IdeaProjects\SWEN3" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Paperless/integration-tests/samples" />
+      <recent name="$PROJECT_DIR$/Paperless/integration-tests/tests" />
+      <recent name="$PROJECT_DIR$/Paperless/untitled" />
+      <recent name="$PROJECT_DIR$/Paperless" />
+      <recent name="$PROJECT_DIR$/Paperless/integration-tests/untitled" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.paperlesslab.paperless.rabbitmq" />
@@ -318,7 +323,8 @@
       <workItem from="1768091184627" duration="14779000" />
       <workItem from="1768160150576" duration="6500000" />
       <workItem from="1768297639502" duration="9283000" />
-      <workItem from="1768773261644" duration="2462000" />
+      <workItem from="1768773261644" duration="5079000" />
+      <workItem from="1768909318055" duration="6867000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -392,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768774552370</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend">
+      <option name="closed" value="true" />
+      <created>1768775942842</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1768775942843</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +440,8 @@
     <MESSAGE value="added in workflow that index-worker" />
     <MESSAGE value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
     <MESSAGE value="fixed UI view it is now cleaner" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed UI view it is now cleaner" />
+    <MESSAGE value="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [
