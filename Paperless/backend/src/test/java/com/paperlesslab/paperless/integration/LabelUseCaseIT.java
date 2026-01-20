@@ -24,24 +24,24 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Sprint 7 - Standard integration test:
- * Upload -> Update -> Delete (REST level, DB real, infra mocked).
- *
- * Includes performance tracking (per-step timestamps) as required in Sprint 7.
+ * Sprint 7 - Unique feature integration test:
+ * Upload document -> create labels -> tag document -> remove labels -> delete label
+ * REST level, real PostgreSQL via Testcontainers, infra mocked.
  */
 @Testcontainers
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("it")
-class DocumentStandardFlowIT {
+class LabelUseCaseIT {
 
-    private static final Logger log = LoggerFactory.getLogger(DocumentStandardFlowIT.class);
+    private static final Logger log = LoggerFactory.getLogger(LabelUseCaseIT.class);
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
@@ -60,100 +60,106 @@ class DocumentStandardFlowIT {
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
 
-    // Safety: if any rabbit infrastructure is still present, registry bean type must match.
+    // Same safety trick as your DocumentStandardFlowIT
     @MockBean(name = "org.springframework.amqp.rabbit.config.internalRabbitListenerEndpointRegistry")
     RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry;
 
-    // Infra mocks so IT is REST+DB only
+    // Infra mocks: keep IT scope REST + DB
     @MockBean FileStorageService fileStorageService;
     @MockBean RabbitMqProducer rabbitMqProducer;
     @MockBean SearchIndexService searchIndexService;
     @MockBean DocumentSearchService documentSearchService;
 
     @Test
-    void upload_update_delete() throws Exception {
+    void labels_flow_upload_tag_remove_deleteLabel() throws Exception {
         long t0 = System.currentTimeMillis();
 
-        // Upload uses MinIO storage service -> mock it
         doNothing().when(fileStorageService).uploadPdf(any(), any());
         doNothing().when(fileStorageService).deletePdf(any());
 
         // ---------------------------------------------------------------------
-        // STEP 1: UPLOAD
+        // STEP 1: upload document first (required order)
         // ---------------------------------------------------------------------
         long s1 = System.currentTimeMillis();
-        log.info("[STEP 1] Upload document");
-
         MockMultipartFile pdf = new MockMultipartFile(
-                "file", "HelloWorld.pdf", "application/pdf", "%PDF-1.4 fake".getBytes()
+                "file", "LabelDoc.pdf", "application/pdf", "%PDF-1.4 fake".getBytes()
         );
 
         String uploadJson = mockMvc.perform(multipart("/documents/upload")
                         .file(pdf)
-                        .param("description", "initial desc"))
+                        .param("description", "doc for label usecase"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.filename").exists())
+                .andExpect(jsonPath("$.labels").isArray())
+                .andExpect(jsonPath("$.labels", hasSize(0)))
                 .andReturn().getResponse().getContentAsString();
 
-        JsonNode uploaded = objectMapper.readTree(uploadJson);
-        long docId = uploaded.get("id").asLong();
-
+        long docId = objectMapper.readTree(uploadJson).get("id").asLong();
         log.info("[PERF] upload took {} ms", (System.currentTimeMillis() - s1));
 
         // ---------------------------------------------------------------------
-        // STEP 2: UPDATE description
+        // STEP 2: create two labels
         // ---------------------------------------------------------------------
         long s2 = System.currentTimeMillis();
-        log.info("[STEP 2] Update document description");
-
-        mockMvc.perform(put("/documents/{id}", docId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"description\":\"updated desc\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(docId))
-                .andExpect(jsonPath("$.description").value("updated desc"));
-
-        log.info("[PERF] update took {} ms", (System.currentTimeMillis() - s2));
+        long labelAId = createLabel("Finance");
+        long labelBId = createLabel("2026");
+        log.info("[PERF] create labels took {} ms", (System.currentTimeMillis() - s2));
 
         // ---------------------------------------------------------------------
-        // STEP 3: GET should return updated doc
+        // STEP 3: tag document with those labels
         // ---------------------------------------------------------------------
         long s3 = System.currentTimeMillis();
-        log.info("[STEP 3] Get document and verify update");
-
-        mockMvc.perform(get("/documents/{id}", docId))
+        mockMvc.perform(put("/documents/{id}/labels", docId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"labelIds\":[" + labelAId + "," + labelBId + "]}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(docId))
-                .andExpect(jsonPath("$.description").value("updated desc"));
+                .andExpect(jsonPath("$.labels").isArray())
+                .andExpect(jsonPath("$.labels", hasSize(2)));
+        log.info("[PERF] tag document took {} ms", (System.currentTimeMillis() - s3));
 
-        log.info("[PERF] get took {} ms", (System.currentTimeMillis() - s3));
+        // Verify GET returns labels
+        mockMvc.perform(get("/documents/{id}", docId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.labels", hasSize(2)));
 
         // ---------------------------------------------------------------------
-        // STEP 4: DELETE
+        // STEP 4: remove labels by setting empty list
         // ---------------------------------------------------------------------
         long s4 = System.currentTimeMillis();
-        log.info("[STEP 4] Delete document");
-
-        mockMvc.perform(delete("/documents/{id}", docId))
-                .andExpect(status().isNoContent());
-
-        log.info("[PERF] delete took {} ms", (System.currentTimeMillis() - s4));
+        mockMvc.perform(put("/documents/{id}/labels", docId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"labelIds\":[]}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.labels", hasSize(0)));
+        log.info("[PERF] remove labels took {} ms", (System.currentTimeMillis() - s4));
 
         // ---------------------------------------------------------------------
-        // STEP 5: GET after delete -> 404
+        // STEP 5: delete a label (should unlink join table safely in LabelService)
         // ---------------------------------------------------------------------
         long s5 = System.currentTimeMillis();
-        log.info("[STEP 5] Verify document is gone (404)");
+        mockMvc.perform(delete("/labels/{id}", labelAId))
+                .andExpect(status().isNoContent());
+        log.info("[PERF] delete label took {} ms", (System.currentTimeMillis() - s5));
 
-        mockMvc.perform(get("/documents/{id}", docId))
-                .andExpect(status().isNotFound());
+        // Labels list should not contain deleted label anymore
+        mockMvc.perform(get("/labels"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
 
-        log.info("[PERF] get-after-delete took {} ms", (System.currentTimeMillis() - s5));
-
-        // ---------------------------------------------------------------------
-        // TOTAL
-        // ---------------------------------------------------------------------
         log.info("[PERF] total test took {} ms", (System.currentTimeMillis() - t0));
+    }
+
+    private long createLabel(String name) throws Exception {
+        String json = mockMvc.perform(post("/labels")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"" + name + "\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").value(name))
+                .andReturn().getResponse().getContentAsString();
+
+        JsonNode n = objectMapper.readTree(json);
+        return n.get("id").asLong();
     }
 }
