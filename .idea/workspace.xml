@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="32e2efb7-00bb-43c9-9244-407836d0b0ff" name="Changes" comment="fixed small designing styles">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Paperless/frontend/src/pages/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/frontend/src/pages/Upload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Paperless/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Paperless/backend/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +320,7 @@
       <workItem from="1768160150576" duration="6500000" />
       <workItem from="1768297639502" duration="9283000" />
       <workItem from="1768773261644" duration="5079000" />
-      <workItem from="1768909318055" duration="6867000" />
+      <workItem from="1768909318055" duration="7986000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;new subproject index-worker (Spring Boot + Rabbit Listener) added">
       <option name="closed" value="true" />
@@ -406,7 +402,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768775942843</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixed small designing styles">
+      <option name="closed" value="true" />
+      <created>1768935200733</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1768935200734</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +445,8 @@
     <MESSAGE value="added UseCase: Labels+Status+Favorite Unittests are not working need to fix this" />
     <MESSAGE value="fixed UI view it is now cleaner" />
     <MESSAGE value="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="added to admin labels &#10;added Labels.tsx and updated the functions fpr backend and frontend" />
+    <MESSAGE value="fixed small designing styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed small designing styles" />
   </component>
   <component name="WfRunsListSearchHistory">{
   &quot;history&quot;: [
